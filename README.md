@@ -32,4 +32,4 @@ https://github.com/Ariel-alt-max/ORAE-18-09-25/blob/main/buapo.jpg
 
 **Correo:** 24308060610041@cetis61.edu.mx
 
-![Oaxaca Orona David Adrian foto](https://github.com/Ariel-alt-max/ORAE-18-09-25/blob/main/buapo.jpg)
+![Oaxaca Orona David Adrian foto](https://github.com/Davidoaxacacetis/ORAE19-09-2025/blob/main/buapo.jpg)
