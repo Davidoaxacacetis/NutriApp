@@ -20,8 +20,6 @@
 
 ![Oaxaca Orona David Adrian foto](https://github.com/Davidoaxacacetis/html/blob/main/f11.jpg)
 
-https://github.com/Ariel-alt-max/ORAE-18-09-25/blob/main/buapo.jpg
-
 ### Ortega Ramirez Ariel Emilio
 
 **Grupo:** 3 - D
