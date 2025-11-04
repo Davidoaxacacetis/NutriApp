@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block contenido %}
+<main class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+                <h1 class="text-center mb-3">Practica</h1>
+                <h4 class="text-center mb-3">Calcudora de IMC</h4>
+                <h6 class="text-center mb-4">Es fácil y rápido</h6>
+
+                <form method="post" action="{{ url_for('calcuimc') }}">
+
+                    <div class="mb-3">
+                        <label for="peso1" class="form-label">Peso</label>
+                        <input 
+                            class="form-control rounded-pill" 
+                            name="peso1" 
+                            id="peso1" 
+                            placeholder="Peso (Kg) " 
+                            required
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="altura1" class="form-label">Tu altura</label>
+                        <input 
+                            class="form-control rounded-pill" 
+                            name="altura1" 
+                            id="altura1" 
+                            placeholder="Altura(m)" 
+                            required
+                        >
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success rounded-pill me-2">Calcular</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}

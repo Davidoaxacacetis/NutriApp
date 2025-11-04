@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block titulo %}Registro{% endblock %}
+
+{% block contenido %}
+<main class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+                <h1 class="text-center mb-3">Mi primer formulario</h1>
+                <h4 class="text-center mb-3">Crea una cuenta</h4>
+                <h6 class="text-center mb-4">Es fácil y rápido</h6>
+
+                <form method="post" action="{{ url_for('registrame') }}">
+                    <div class="row mb-3">
+                        <div class="container mt-4">
+                            {%with messages = get_flashed_messages(with_categories=true)%}
+                            {% if messages%}
+                            {% for category, message in messages%}
+                            <div class="alert alert-{{ 'danger' if category == 'error' else 'danger'}} alert-dismissible  fade show "
+                                role="alert">
+                                {{message}}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            {%endfor%}
+                            {%endif%}
+                            {%endwith%}
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" required name="name" id="name" class="form-control rounded-pill"
+                                placeholder="Tu nombre/s" value="{{ request.form.get('name','') }}">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" required name="apellido" id="apellido" class="form-control rounded-pill"
+                                placeholder="Tu apellido/s" value="{{ request.form.get('apellido','') }}">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
+                        <input type="date" class="form-control rounded-pill" name="fecha_nacimiento"
+                            id="fecha_nacimiento" required value="{{ request.form.get('fecha_nacimiento','') }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo</label>
+                        <input type="email" required class="form-control rounded-pill" name="email" id="email"
+                            placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                            value="{{ request.form.get('email','') }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contraseña" class="form-label">Contraseña</label>
+                        <input type="password" required class="form-control rounded-pill" name="contraseña"
+                            id="contraseña" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters"
+                            placeholder="No la compartas">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="confirmarcontra" class="form-label">Confirmar contraseña</label>
+                        <input type="password" required class="form-control rounded-pill" name="confirmarcontra"
+                            id="confirmarcontra" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            placeholder="Confirma tu contraseña">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="genero" class="form-label">Género</label>
+                        <select class="form-select rounded-pill" name="genero" id="genero" required>
+                            <option value="">Selecciona tu género</option>
+                            <option value="Hombre" {% if request.form.get('genero')=='Hombre' %}selected{% endif %}>
+                                Hombre</option>
+                            <option value="Mujer" {% if request.form.get('genero')=='Mujer' %}selected{% endif %}>
+                                Mujer
+                            </option>
+                            <option value="Otro" {% if request.form.get('genero')=='Otro' %}selected{% endif %}>
+                                Otro
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-check m-2">
+                        <input class="form-check-input" type="checkbox" value="" id="aceptnoti" name="aceptnoti">
+                        <label class="form-check-label" for="aceptnoti">
+                            Quiero que me envien notificaciones.
+                        </label>
+                    </div>
+                    <div class="form-check m-2">
+                        <input class="form-check-input" type="checkbox" value="" name="terminosacep" id="terminosacep">
+                        <label class="form-check-label" for="terminosacep">
+                            Acepto los <a href=""> terminos y condiciones.</a>
+                        </label>
+                    </div>
+
+                    <div class="text-center mb-3">
+                        <p>Es posible que las personas que usan nuestro servicio hayan subido tu información de contacto
+                            a Facebook. <a href="#">Más información</a></p>
+                        <p>Al hacer clic en "Registrarte", aceptas nuestras <a href="#">Condiciones</a>, <a
+                                href="#">Política de privacidad</a> y <a href="#">Política de cookies</a>.</p>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success rounded-pill me-2">Registrarte</button>
+                        <a href="{{ url_for('sesion') }}" class="btn btn-primary rounded-pill">¿Ya tienes cuenta?</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}

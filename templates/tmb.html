@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block contenido %}
+<main class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+                <h1 class="text-center mb-3">Examen</h1>
+                <h4 class="text-center mb-3">Calcudora de Gasto energetico (TMB Y GET)</h4>
+                <h6 class="text-center mb-4">Es fácil y rápido</h6>
+
+                <form>
+
+                    <div class="mb-3">
+                        <h5>Tu TMB es:{{v2}}</h5>
+                        <h5>Tu GET es:{{v1}}</h5>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="{{ url_for('Itmb') }}" class="btn btn-primary rounded-pill">Calcular otro</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}

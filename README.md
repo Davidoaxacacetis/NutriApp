@@ -30,4 +30,4 @@
 
 **Correo:** 24308060610041@cetis61.edu.mx
 
-![Oaxaca Orona David Adrian foto](https://github.com/Davidoaxacacetis/ORAE19-09-2025/blob/main/buapo.jpg)
+![Ortega Ramirez Ariel Emilio](https://github.com/Davidoaxacacetis/ORAE19-09-2025/blob/main/buapo.jpg)
