@@ -1,4 +1,4 @@
-Aquí tienes tu texto convertido al **formato Markdown (MD)** correctamente estructurado:
+
 
 ---
 
