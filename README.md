@@ -2,9 +2,7 @@
 
 ## Objetivo : 
 
-
-
-
+Crear una API
 
 ## Integrantes : 
 
