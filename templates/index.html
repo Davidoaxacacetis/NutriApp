@@ -6,36 +6,23 @@
 <div class="text-center mt-5 pt-5">
     <h1><strong>Bienvenido a mi sitio</strong></h1>
     <p class="lead">
-        Api
+        Haz que los botones estén ordenados y también sean responsivos a cada tamaño de la pantalla con Bootstrap.
     </p>
 </div>
 {% endblock %}
 
 {% block contenido %}
+<div class="container">
+    <div class="row text-center mt-4">
+        <div class="col-12 col-md-3 mb-3">
+            <h5>TMB y GET</h5>
+            <a href="/tasa" class="btn btn-info w-100">Calcular TMB y GET</a>
+        </div>
+        <div class="col-12 col-md-3 mb-3">
+            <h5>IMC</h5>
+            <a href="/daw" class="btn btn-primary w-100">Calcular IMC</a>
+        </div>
+    </div>
 
-<div class="row text-center mt-4">
-    <div class="col-md-3 mb-3">
-        <h5>TMB y GET</h5>
-        <a href="/tasa" class="btn btn-info">Calcular TMB y GET</a>
-    </div>
-    <div class="col-md-3 mb-3">
-        <h5>IMC</h5>
-        <a href="/daw" class="btn btn-primary">Calcular IMC</a>
-    </div>
-</div>
-
-<div class="row text-center mt-3">
-    <div class="col-md-3 mb-3">
-        <h5>Acerca de mí</h5>
-        <a href="/acerca-de" class="btn btn-info">Ver más</a>
-    </div>
-    <div class="col-md-3 mb-3">
-        <h5>Registrarte</h5>
-        <a href="/registrate" class="btn btn-primary">Crear cuenta</a>
-    </div>
-    <div class="col-md-3 mb-3">
-        <h5>Iniciar sesión</h5>
-        <a href="/inicia-sesion" class="btn btn-success">Entrar</a>
-    </div>
 </div>
 {% endblock %}
