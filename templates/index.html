@@ -6,23 +6,25 @@
 <div class="text-center mt-5 pt-5">
     <h1><strong>Bienvenido a mi sitio</strong></h1>
     <p class="lead">
-        Haz que los botones estén ordenados y también sean responsivos a cada tamaño de la pantalla con Bootstrap.
+        Encuentra herramientas para mejorar tu salud y bienestar 🍎
     </p>
 </div>
 {% endblock %}
 
 {% block contenido %}
 <div class="container">
-    <div class="row text-center mt-4">
-        <div class="col-12 col-md-3 mb-3">
+
+    <div class="row text-center mt-4 justify-content-center">
+        <div class="col-12 col-sm-6 col-md-3 mb-4">
             <h5>TMB y GET</h5>
-            <a href="/tasa" class="btn btn-info w-100">Calcular TMB y GET</a>
+            <a href="/tasa" class="btn btn-success w-100 shadow-sm">Calcular TMB y GET</a>
         </div>
-        <div class="col-12 col-md-3 mb-3">
+        <div class="col-12 col-sm-6 col-md-3 mb-4">
             <h5>IMC</h5>
-            <a href="/daw" class="btn btn-primary w-100">Calcular IMC</a>
+            <a href="/daw" class="btn btn-warning w-100 text-dark shadow-sm">Calcular IMC</a>
         </div>
     </div>
+
 
 </div>
 {% endblock %}

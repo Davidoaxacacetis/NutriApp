@@ -34,6 +34,8 @@ def registrame():
     confirmarcontra = request.form.get("confirmarcontra")
     fecha_nacimiento = request.form.get("fecha_nacimiento")
     genero = request.form.get("genero")
+    peso2 = request.form.get("peso2")
+    altura2 = request.form.get("altura2")
 
     if contraseña != confirmarcontra:
         flash("Las contraseñas no coinciden", "error")
