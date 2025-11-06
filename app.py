@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-
+from datetime import datetime
 
 app = Flask(__name__)
 USUARIOS_REGISTRADOS ={
@@ -34,26 +34,55 @@ def registrame():
     confirmarcontra = request.form.get("confirmarcontra")
     fecha_nacimiento = request.form.get("fecha_nacimiento")
     genero = request.form.get("genero")
-    peso2 = request.form.get("peso2")
-    altura2 = request.form.get("altura2")
+    peso = request.form.get("peso")
+    altura = request.form.get("altura")
+    objetivos = request.form.get("objetivos")
+    alergias = request.form.get("alergias")
+    intolerancias = request.form.get("intolerancias")
+    dietas = request.form.get("dietas")
+    no_me_gustan = request.form.get("no_me_gustan")
+    experiencia_cocina = request.form.get("experiencia_cocina")
+
+    if not nombrecompleto or not apellido or not email or not contraseña or not confirmarcontra or not fecha_nacimiento:
+        flash("Todos los campos son obligatorios.", "error")
+        return render_template("registro.html", **request.form)
 
     if contraseña != confirmarcontra:
         flash("Las contraseñas no coinciden", "error")
-        return render_template("registro.html")
+        return render_template("registro.html", **request.form)
 
     if email in USUARIOS_REGISTRADOS:
-        flash("Este correo ya está registrado", "error")
-        return render_template("registro.html")
+        flash("Este correo electrónico ya está registrado", "error")
+        return render_template("registro.html", **request.form)
+
+    try:
+        fecha_nacimiento_obj = datetime.strptime(fecha_nacimiento, "%Y-%m-%d")
+        today = datetime.today()
+        edad = today.year - fecha_nacimiento_obj.year - ((today.month, today.day) < (fecha_nacimiento_obj.month, fecha_nacimiento_obj.day))
+    except ValueError:
+        flash("Fecha de nacimiento inválida", "error")
+        return render_template("registro.html", **request.form)
 
     USUARIOS_REGISTRADOS[email] = {
         "password": contraseña,
         "nombre": nombrecompleto,
+        "apellido": apellido,
         "fecha_nacimiento": fecha_nacimiento,
-        "genero": genero
+        "edad": edad,
+        "genero": genero,
+        "peso": peso,
+        "altura": altura,
+        "objetivos": objetivos,
+        "alergias": alergias,
+        "intolerancias": intolerancias,
+        "dietas": dietas,
+        "no_me_gustan": no_me_gustan,
+        "experiencia_cocina": experiencia_cocina
     }
 
     flash(f"¡Registro exitoso para {nombrecompleto}!", "success")
     return redirect(url_for("sesion"))
+
 
 @app.route("/inicia-sesion")
 def sesion():
@@ -65,28 +94,41 @@ def cerrar_sesion():
     flash("Sesión cerrada correctamente", "info")
     return redirect(url_for("index"))
 
-
 @app.route("/validalogin", methods=["POST"])
 def validalogin():
-    if request.method== "POST":
-        email= request.form.get("usu_name","").strip()
-        password =request.form.get("password2","")
+    if request.method == "POST":
+        email = request.form.get("usu_name", "").strip()
+        password = request.form.get("password2", "")
 
         if not email or not password:
             flash("Por favor ingresa email y contraseña", "error")
+            return render_template("inicia.html")
+
         elif email in USUARIOS_REGISTRADOS:
-            usuario= USUARIOS_REGISTRADOS[email]
-            if usuario["password"]==password:
+            usuario = USUARIOS_REGISTRADOS[email]
+
+            if usuario["password"] == password:
                 session["usuario_email"] = email
                 session["usuario"] = usuario["nombre"]
-                session["logueado"] = True
+                session["logueado"] = True  
+                flash(f"Bienvenido {usuario['nombre']}!", "success")
                 return redirect(url_for("index"))
             else:
-                flash("Contraseña incorrecta","error")
+                flash("Contraseña incorrecta", "error")
         else:
-            flash("Usuario no encontrado","error")
+            flash("Usuario no encontrado", "error")
     
     return render_template("inicia.html")
+
+@app.route("/perfil")
+def perfil():
+    if not session.get("logueado"):
+        return redirect(url_for("sesion"))
+    
+    email = session.get("usuario_email")
+    usuario = USUARIOS_REGISTRADOS.get(email)
+    
+    return render_template("perfil.html", usuario=usuario)
 
 @app.route("/tasa")
 def Itmb():

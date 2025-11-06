@@ -13,36 +13,37 @@
                 <form method="post" action="{{ url_for('registrame') }}">
                     <div class="row mb-3">
                         <div class="container mt-4">
-                            {%with messages = get_flashed_messages(with_categories=true)%}
-                            {% if messages%}
-                            {% for category, message in messages%}
-                            <div class="alert alert-{{ 'danger' if category == 'error' else 'danger'}} alert-dismissible  fade show "
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                            {% for category, message in messages %}
+                            <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show"
                                 role="alert">
-                                {{message}}
+                                {{ message }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            {%endfor%}
-                            {%endif%}
-                            {%endwith%}
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 p-2">
                             <input type="text" required name="name" id="name" class="form-control rounded-pill"
                                 placeholder="Tu nombre/s" value="{{ request.form.get('name','') }}">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 p-2">
                             <input type="text" required name="apellido" id="apellido" class="form-control rounded-pill"
                                 placeholder="Tu apellido/s" value="{{ request.form.get('apellido','') }}">
                         </div>
-                        <div class="col-md-6 p-2 " >
-                            <input type="text" required name="peso2" id="peso2" class="form-control rounded-pill"
-                                placeholder="Tu peso(Kg)" value="{{ request.form.get('peso2','') }}">
+                        <div class="col-md-6 p-2">
+                            <input type="number" required name="peso" id="peso" class="form-control rounded-pill"
+                                placeholder="Tu peso (Kg)" value="{{ request.form.get('peso','') }}">
                         </div>
                         <div class="col-md-6 p-2">
-                            <input type="text" required name="altura2" id="altura2" class="form-control rounded-pill"
-                                placeholder="Tu altura(cm)" value="{{ request.form.get('altura2','') }}">
+                            <input type="number" required name="altura" id="altura" class="form-control rounded-pill"
+                                placeholder="Tu altura (cm)" value="{{ request.form.get('altura','') }}">
                         </div>
                     </div>
+
                     <div class="mb-3">
                         <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
                         <input type="date" class="form-control rounded-pill" name="fecha_nacimiento"
@@ -50,86 +51,84 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="email" class="form-label">Correo</label>
-                        <input type="email" required class="form-control rounded-pill" name="email" id="email"
-                            placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                            value="{{ request.form.get('email','') }}">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control rounded-pill" name="email" id="email"
+                            placeholder="Tu correo electrónico" required value="{{ request.form.get('email','') }}">
                     </div>
 
                     <div class="mb-3">
                         <label for="contraseña" class="form-label">Contraseña</label>
-                        <input type="password" required class="form-control rounded-pill" name="contraseña"
-                            id="contraseña" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                            title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters"
-                            placeholder="No la compartas">
+                        <input type="password" class="form-control rounded-pill" name="contraseña" id="contraseña"
+                            minlength="8" required placeholder="No la compartas">
                     </div>
 
                     <div class="mb-3">
                         <label for="confirmarcontra" class="form-label">Confirmar contraseña</label>
-                        <input type="password" required class="form-control rounded-pill" name="confirmarcontra"
-                            id="confirmarcontra" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                            placeholder="Confirma tu contraseña">
+                        <input type="password" class="form-control rounded-pill" name="confirmarcontra"
+                            id="confirmarcontra" minlength="8" required placeholder="Confirma tu contraseña">
                     </div>
 
                     <div class="mb-3">
-                        <label for="genero" class="form-label">Género</label>
-                        <select class="form-select rounded-pill" name="genero" id="genero" required>
-                            <option value="">Selecciona tu género</option>
-                            <option value="Hombre" {% if request.form.get('genero')=='Hombre' %}selected{% endif %}>
-                                Hombre</option>
-                            <option value="Mujer" {% if request.form.get('genero')=='Mujer' %}selected{% endif %}>
-                                Mujer
-                            </option>
-                            <option value="Otro" {% if request.form.get('genero')=='Otro' %}selected{% endif %}>
-                                Otro
-                            </option>
+                        <label for="objetivos" class="form-label">Objetivos</label>
+                        <select class="form-select rounded-pill" name="objetivos" id="objetivos" required>
+                            <option value="bajar_peso" {% if request.form.get('objetivos')=='bajar_peso' %}selected{%
+                                endif %}>Bajar de peso</option>
+                            <option value="aumentar_masa_muscular" {% if
+                                request.form.get('objetivos')=='aumentar_masa_muscular' %}selected{% endif %}>Aumentar
+                                masa muscular</option>
+                            <option value="mantener_peso" {% if request.form.get('objetivos')=='mantener_peso'
+                                %}selected{% endif %}>Mantener peso</option>
+                            <option value="mejorar_digestión" {% if request.form.get('objetivos')=='mejorar_digestión'
+                                %}selected{% endif %}>Mejorar digestión</option>
+                            <option value="controlar_condicion" {% if
+                                request.form.get('objetivos')=='controlar_condicion' %}selected{% endif %}>Controlar una
+                                condición</option>
                         </select>
                     </div>
+
                     <div class="mb-3">
-                        <label for="actividad" class="form-label">Nivel de actividad</label>
-                        <select class="form-select rounded-pill" name="actividad" id="actividad" required>
-                            <option value="">Selecciona tu nivel de actividad fisica</option>
-                            <option value="seden" {% if request.form.get('actividad')=='seden' %}selected{% endif %}>
-                                Sedentario (Poco o ningú ejercicio)
-                            </option>
-                            <option value="ligera" {% if request.form.get('actividad')=='ligera' %}selected{% endif %}>
-                                Ligera (Ejercicio 1-3 dias/semana)
-                            </option>
-                            <option value="moderada" {% if request.form.get('actividad')=='moderada' %}selected{% endif %}>
-                                Moderada (Ejercicio 3-5 dias/semana)
-                            </option>
-                            <option value="alta" {% if request.form.get('actividad')=='alta' %}selected{% endif %}>
-                                Alta (Ejercicio 6-7 dias/semana)
-                            </option>
+                        <label for="alergias" class="form-label">Alergias</label>
+                        <input type="text" class="form-control rounded-pill" name="alergias" id="alergias"
+                            placeholder="Ej: Maní, Mariscos, etc." value="{{ request.form.get('alergias','') }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="intolerancias" class="form-label">Intolerancias</label>
+                        <input type="text" class="form-control rounded-pill" name="intolerancias" id="intolerancias"
+                            placeholder="Ej: Lactosa, Gluten, etc." value="{{ request.form.get('intolerancias','') }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="dietas" class="form-label">Dietas</label>
+                        <input type="text" class="form-control rounded-pill" name="dietas" id="dietas"
+                            placeholder="Ej: Vegana, Keto, Mediterránea" value="{{ request.form.get('dietas','') }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="no_me_gustan" class="form-label">Alimentos que no te gustan</label>
+                        <input type="text" class="form-control rounded-pill" name="no_me_gustan" id="no_me_gustan"
+                            placeholder="Ej: Tomates, Espárragos" value="{{ request.form.get('no_me_gustan','') }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="experiencia_cocina" class="form-label">Nivel de experiencia en la cocina</label>
+                        <select class="form-select rounded-pill" name="experiencia_cocina" id="experiencia_cocina"
+                            required>
+                            <option value="principiante" {% if request.form.get('experiencia_cocina')=='principiante'
+                                %}selected{% endif %}>Principiante</option>
+                            <option value="aficionado" {% if request.form.get('experiencia_cocina')=='aficionado'
+                                %}selected{% endif %}>Aficionado</option>
+                            <option value="experto" {% if request.form.get('experiencia_cocina')=='experto' %}selected{%
+                                endif %}>Experto</option>
                         </select>
-                    </div>
-
-                    <div class="form-check m-2">
-                        <input class="form-check-input" type="checkbox" value="" id="aceptnoti" name="aceptnoti">
-                        <label class="form-check-label" for="aceptnoti">
-                            Quiero que me envien notificaciones.
-                        </label>
-                    </div>
-                    <div class="form-check m-2">
-                        <input class="form-check-input" type="checkbox" value="" name="terminosacep" id="terminosacep">
-                        <label class="form-check-label" for="terminosacep">
-                            Acepto los <a href=""> terminos y condiciones.</a>
-                        </label>
-                    </div>
-
-                    <div class="text-center mb-3">
-                        <p>Es posible que las personas que usan nuestro servicio hayan subido tu información de contacto
-                            a Facebook. <a href="#">Más información</a></p>
-                        <p>Al hacer clic en "Registrarte", aceptas nuestras <a href="#">Condiciones</a>, <a
-                                href="#">Política de privacidad</a> y <a href="#">Política de cookies</a>.</p>
                     </div>
 
                     <div class="text-center">
                         <button type="submit" class="btn btn-success rounded-pill me-2">Registrarte</button>
                         <a href="{{ url_for('sesion') }}" class="btn btn-primary rounded-pill">¿Ya tienes cuenta?</a>
                     </div>
-
                 </form>
+
             </div>
         </div>
     </div>

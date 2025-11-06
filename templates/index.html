@@ -13,18 +13,26 @@
 
 {% block contenido %}
 <div class="container">
-
     <div class="row text-center mt-4 justify-content-center">
         <div class="col-12 col-sm-6 col-md-3 mb-4">
             <h5>TMB y GET</h5>
-            <a href="/tasa" class="btn btn-success w-100 shadow-sm">Calcular TMB y GET</a>
+            {% if session.get('logueado') %}
+                <a href="/tasa" class="btn btn-success w-100 shadow-sm">Calcular TMB y GET</a>
+            {% else %}
+                <a href="{{ url_for('sesion') }}" class="btn btn-success w-100 shadow-sm" 
+                    data-bs-toggle="tooltip" title="Debes iniciar sesión primero">Calcular TMB y GET</a>
+            {% endif %}
         </div>
         <div class="col-12 col-sm-6 col-md-3 mb-4">
             <h5>IMC</h5>
-            <a href="/daw" class="btn btn-warning w-100 text-dark shadow-sm">Calcular IMC</a>
+            {% if session.get('logueado') %}
+                <a href="/daw" class="btn btn-warning w-100 text-dark shadow-sm">Calcular IMC</a>
+            {% else %}
+                <a href="{{ url_for('sesion') }}" class="btn btn-warning w-100 text-dark shadow-sm" 
+                    data-bs-toggle="tooltip" title="Debes iniciar sesión primero">Calcular IMC</a>
+            {% endif %}
         </div>
     </div>
-
-
 </div>
+
 {% endblock %}
