@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block titulo %}Calculadora de Macronutrientes{% endblock %}
+
+{% block header %}
+<div class="text-center mt-5 pt-5">
+    <h1>Calculadora de Macronutrientes 🍗</h1>
+    <p class="lead">Obtén una estimación diaria de proteínas, grasas y carbohidratos.</p>
+</div>
+{% endblock %}
+
+{% block contenido %}
+<div class="container col-md-6 mt-4">
+    <form method="post" action="/macros">
+        <div class="mb-3">
+            <label for="calorias" class="form-label">Calorías diarias (kcal)</label>
+            <input type="number" class="form-control" id="calorias" name="calorias" required>
+        </div>
+        <button type="submit" class="btn btn-danger w-100 text-white">Calcular</button>
+    </form>
+
+    {% if proteinas %}
+    <div class="alert alert-danger text-center mt-4">
+        <strong>Proteínas:</strong> {{ proteinas }} g<br>
+        <strong>Grasas:</strong> {{ grasas }} g<br>
+        <strong>Carbohidratos:</strong> {{ carbohidratos }} g
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -21,6 +21,10 @@ def index():
 def acecade():
     return render_template("acercade.html")
 
+@app.route('/articulos')
+def articulos():
+    return render_template('articulos.html')
+
 @app.route("/registrate")
 def registro():
     return render_template("registro.html", request=request)
@@ -186,6 +190,34 @@ def calcuimc():
         niv = "Obesidad clase 3 (mórbida)"
 
     return render_template("imc.html", v3=round(imc, 2), v4=niv)
+
+@app.route("/pesoideal", methods=["GET", "POST"])
+def pesoideal():
+    resultado = None
+    if request.method == "POST":
+        altura = float(request.form.get("altura")) / 100  
+        genero = request.form.get("genero")
+
+        
+        if genero == "Hombre":
+            resultado = 50 + 2.3 * ((altura * 100 / 2.54) - 60)
+        else:
+            resultado = 45.5 + 2.3 * ((altura * 100 / 2.54) - 60)
+        resultado = round(resultado, 2)
+
+    return render_template("pesoideal.html", resultado=resultado)
+
+
+@app.route("/macros", methods=["GET", "POST"])
+def macros():
+    proteinas = grasas = carbohidratos = None
+    if request.method == "POST":
+        calorias = float(request.form.get("calorias"))
+        proteinas = round((calorias * 0.3) / 4, 1)      
+        grasas = round((calorias * 0.25) / 9, 1)        
+        carbohidratos = round((calorias * 0.45) / 4, 1) 
+
+    return render_template("macros.html", proteinas=proteinas, grasas=grasas, carbohidratos=carbohidratos)
 
 if __name__ == '__main__':
     app.run(debug=True)

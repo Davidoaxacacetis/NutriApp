@@ -14,25 +14,73 @@
 {% block contenido %}
 <div class="container">
     <div class="row text-center mt-4 justify-content-center">
+
+        <h3 class="mb-4"><strong>⚙️ Módulo de Herramientas</strong></h3>
+
         <div class="col-12 col-sm-6 col-md-3 mb-4">
             <h5>TMB y GET</h5>
             {% if session.get('logueado') %}
                 <a href="/tasa" class="btn btn-success w-100 shadow-sm">Calcular TMB y GET</a>
             {% else %}
-                <a href="{{ url_for('sesion') }}" class="btn btn-success w-100 shadow-sm" 
-                    data-bs-toggle="tooltip" title="Debes iniciar sesión primero">Calcular TMB y GET</a>
+                <a href="{{ url_for('sesion') }}" 
+                   class="btn btn-success w-100 shadow-sm" 
+                   data-bs-toggle="tooltip" 
+                   title="Debes iniciar sesión primero">Calcular TMB y GET</a>
             {% endif %}
         </div>
+
         <div class="col-12 col-sm-6 col-md-3 mb-4">
             <h5>IMC</h5>
             {% if session.get('logueado') %}
                 <a href="/daw" class="btn btn-warning w-100 text-dark shadow-sm">Calcular IMC</a>
             {% else %}
-                <a href="{{ url_for('sesion') }}" class="btn btn-warning w-100 text-dark shadow-sm" 
-                    data-bs-toggle="tooltip" title="Debes iniciar sesión primero">Calcular IMC</a>
+                <a href="{{ url_for('sesion') }}" 
+                   class="btn btn-warning w-100 text-dark shadow-sm" 
+                   data-bs-toggle="tooltip" 
+                   title="Debes iniciar sesión primero">Calcular IMC</a>
+            {% endif %}
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3 mb-4">
+            <h5>Peso Corporal Ideal</h5>
+            {% if session.get('logueado') %}
+                <a href="/pesoideal" class="btn btn-info w-100 text-white shadow-sm">Calcular Peso Ideal</a>
+            {% else %}
+                <a href="{{ url_for('sesion') }}" 
+                   class="btn btn-info w-100 text-white shadow-sm" 
+                   data-bs-toggle="tooltip" 
+                   title="Debes iniciar sesión primero">Calcular Peso Ideal</a>
+            {% endif %}
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3 mb-4">
+            <h5>Macronutrientes</h5>
+            {% if session.get('logueado') %}
+                <a href="/macros" class="btn btn-danger w-100 text-white shadow-sm">Calcular Macronutrientes</a>
+            {% else %}
+                <a href="{{ url_for('sesion') }}" 
+                   class="btn btn-danger w-100 text-white shadow-sm" 
+                   data-bs-toggle="tooltip" 
+                   title="Debes iniciar sesión primero">Calcular Macronutrientes</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row text-center justify-content-center">
+        <h3 class="mb-4"><strong>📘 Artículos Educativos</strong></h3>
+
+        <div class="col-12 col-sm-6 col-md-3 mb-4">
+            {% if session.get('logueado') %}
+                <a href="/articulos" class="btn btn-secondary w-100 text-white shadow-sm">Ver artículos</a>
+            {% else %}
+                <a href="{{ url_for('sesion') }}" 
+                   class="btn btn-secondary w-100 text-white shadow-sm" 
+                   data-bs-toggle="tooltip" 
+                   title="Debes iniciar sesión primero">Ver artículos</a>
             {% endif %}
         </div>
     </div>
 </div>
-
 {% endblock %}
