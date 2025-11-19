@@ -69,6 +69,23 @@
     <hr class="my-5">
 
     <div class="row text-center justify-content-center">
+        <h3 class="mb-4"><strong>🔎 Buscar nutrientes de un alimento</strong></h3>
+
+        <div class="col-12 col-sm-6 col-md-3 mb-4">
+            {% if session.get('logueado') %}
+                <a href="/busqueda" class="btn btn-secondary w-100 text-white shadow-sm">Buscar</a>
+            {% else %}
+                <a href="{{ url_for('sesion') }}" 
+                    class="btn btn-secondary w-100 text-white shadow-sm" 
+                    data-bs-toggle="tooltip" 
+                    title="Debes iniciar sesión primero">Buscar alimento</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row text-center justify-content-center">
         <h3 class="mb-4"><strong>📘 Artículos Educativos</strong></h3>
 
         <div class="col-12 col-sm-6 col-md-3 mb-4">

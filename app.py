@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, requests, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from datetime import datetime
+import requests
 
 app = Flask(__name__)
 USUARIOS_REGISTRADOS ={
@@ -9,6 +10,15 @@ USUARIOS_REGISTRADOS ={
         "fecha_nacimiento":"2009-04-11",
         "apellido":"West"
     }
+}
+API_KEY = "udJqwbKLuDZTGgIEmmOlAre5tV47sjQ5ichJxxQO"
+
+tipos = {
+"Branded": "Producto de marca comercial",
+"Survey (FNDDS)": "Alimento de encuesta nacional",
+"Foundation": "Alimento base (datos detallados)",
+"SR Legacy": "Base de datos antigua del USDA",
+"Sample": "Muestra analizada en laboratorio"
 }
 
 app.config['SECRET_KEY'] = "OODA"
@@ -207,7 +217,6 @@ def pesoideal():
 
     return render_template("pesoideal.html", resultado=resultado)
 
-
 @app.route("/macros", methods=["GET", "POST"])
 def macros():
     proteinas = grasas = carbohidratos = None
@@ -218,6 +227,39 @@ def macros():
         carbohidratos = round((calorias * 0.45) / 4, 1) 
 
     return render_template("macros.html", proteinas=proteinas, grasas=grasas, carbohidratos=carbohidratos)
+
+@app.route("/busqueda", methods=["GET", "POST"])
+def busqueda():
+    alimentos = []
+    query = ""
+    if request.method == "POST":
+        query = request.form["query"]
+        url = f"https://api.nal.usda.gov/fdc/v1/foods/search?query={query}&api_key={API_KEY}"
+        response = requests.get(url)
+
+
+        if response.status_code == 200:
+            data = response.json()
+            alimentos = data.get("foods", [])
+        else:
+            alimentos = []
+
+
+    return render_template("busqueda.html", alimentos=alimentos, query=query, tipos=tipos)
+
+@app.route("/detalle/<int:fdc_id>")
+def detalle(fdc_id):
+    url = f"https://api.nal.usda.gov/fdc/v1/food/{fdc_id}?api_key={API_KEY}"
+    response = requests.get(url)
+
+
+    if response.status_code == 200:
+        data = response.json()
+    else:
+        data = None
+
+
+    return render_template("detalle.html", alimento=data)
 
 if __name__ == '__main__':
     app.run(debug=True)
