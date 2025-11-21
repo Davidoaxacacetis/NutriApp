@@ -4,25 +4,164 @@
 
 {% block header %}
 <div class="text-center mt-5 pt-5">
-  <h1><strong>Bienvenido a mi sitio</strong></h1>
+  <h1><strong>Bienvenido a mi nutriapp</strong></h1>
   <p class="lead">
     Encuentra información y herramientas para mejorar tu salud y bienestar 🍎
   </p>
 </div>
 {% endblock %}
-
 {% block contenido %}
 <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-12">
-        <div class="card shadow p-4">
-          <h1 class="text-center mb-3">Practica</h1>
-          <h4 class="text-center mb-3">
-            Calculadora de IMC
-          </h4>
-          <h6 class="text-center mb-4">Es fácil y rápido</h6>
-        </div>
-      </div>
+
+  <section class="mb-5 p-4 bg-white text-dark rounded-4 shadow-sm">
+
+    <h2 class="fw-bold mb-3">Perfil del Usuario</h2>
+
+    <div class="banner" style="
+        width:100%;
+        height:220px;
+        background-image: url('{{ url_for('static', filename='img/nutricion.jpg') }}');
+        background-size: cover;
+        background-position: center;
+        border-radius: 20px;
+     ">
     </div>
+
+    <p>
+      En esta sección el usuario puede registrar información personal que permitirá generar recomendaciones
+      nutricionales completamente personalizadas.
+    </p>
+
+    <h5 class="mt-4">Datos Principales</h5>
+    <ul>
+      <li>Edad, sexo, peso, altura</li>
+      <li>Nivel de actividad física</li>
+      <li>Email, contraseña, nombre y apellidos</li>
+    </ul>
+
+    <h5 class="mt-4">Objetivos Personales</h5>
+    <p>El usuario puede seleccionar su objetivo principal, como:</p>
+    <ul>
+      <li>Bajar de peso</li>
+      <li>Ganar masa muscular</li>
+      <li>Mantener peso</li>
+      <li>Mejorar digestión</li>
+      <li>Controlar diabetes, hipertensión u otras condiciones</li>
+    </ul>
+
+    <h5 class="mt-4">Preferencias y Restricciones</h5>
+    <ul>
+      <li>Alergias: maní, mariscos, huevo, etc.</li>
+      <li>Intolerancias: lactosa, gluten</li>
+      <li>Dietas: Vegana, vegetariana, keto, mediterránea, paleo</li>
+      <li>Alimentos que el usuario no consume</li>
+    </ul>
+
+    <h5 class="mt-4">Nivel de Experiencia en Cocina</h5>
+    <ul>
+      <li>Principiante: conoce lo básico</li>
+      <li>Intermedio: puede seguir recetas</li>
+      <li>Avanzado: cocina creativa, tipo chef</li>
+    </ul>
+
+  </section>
+
+
+  <section class="mb-5 p-4 bg-white text-dark rounded-4 shadow-sm">
+
+    <h2 class="fw-bold mb-3">Educación Nutricional</h2>
+
+    <div class="banner" style="
+        width:100%;
+        height:220px;
+        background-image: url('{{ url_for('static', filename='img/educacion_optimized.webp') }}');
+        background-size: cover;
+        background-position: center;
+        border-radius: 20px;
+     ">
+    </div>
+
+
+    <p>
+      Esta sección ofrece artículos actualizados y fáciles de entender para mejorar tu conocimiento
+      sobre salud y nutrición.
+    </p>
+
+    <h5 class="mt-4">Artículos Destacados</h5>
+    <ul>
+      <li>Cómo leer etiquetas nutricionales</li>
+      <li>Mitos y verdades sobre las dietas de moda</li>
+      <li>¿Qué son los macronutrientes y para qué sirven?</li>
+      <li>La importancia de la hidratación y la fibra</li>
+    </ul>
+
+    <h5 class="mt-4">Recursos Descargables</h5>
+    <ul>
+      <li>Guías rápidas de alimentación saludable</li>
+      <li>Rutinas de ejercicios básicos para complementar tu dieta</li>
+    </ul>
+
+  </section>
+
+
+  <section class="mb-5 p-4 bg-white text-dark rounded-4 shadow-sm">
+
+    <h2 class="fw-bold mb-3">Recetas y Planificación</h2>
+
+    <div class="mb-4 rounded-4" style="
+        width:100%; 
+        height:300px; 
+        background-image: url('{{ url_for('static', filename='img/recetas.webp') }}');
+        background-size: cover;
+        background-position: center;
+     ">
+    </div>
+
+
+    <p>
+      Encuentra recetas saludables adaptadas a tu nivel de experiencia, tus objetivos y tus preferencias
+      alimentarias.
+    </p>
+
+    <h5 class="mt-4">Banco de Recetas</h5>
+    <ul>
+      <li>Filtros por tiempo, dificultad, calorías y tipo de dieta</li>
+      <li>Recetas para principiantes con pocos ingredientes</li>
+      <li>Meal Prep: recetas para preparar en lote y ahorrar tiempo</li>
+    </ul>
+
+  </section>
+
+  <section class="mb-5 p-4 bg-white text-dark rounded-4 shadow-sm">
+
+    <h2 class="fw-bold mb-3">Ejercicios y Rutinas</h2>
+
+    <div class="mb-4 rounded-4" style="
+      width:100%; 
+      height:300px; 
+      background-image: url('{{ url_for('static', filename='img/ejercicio.webp') }}');
+      background-size: cover;
+      background-position: center;
+   ">
+    </div>
+
+    <p>
+      Encuentra recomendaciones de actividad física adaptadas a tus objetivos, ya sea aumentar masa muscular,
+      perder grasa, mejorar tu resistencia o simplemente mantener un estilo de vida saludable.
+      Las rutinas están pensadas para realizarse en casa o en gimnasio, sin importar tu nivel.
+    </p>
+
+    <h5 class="mt-4">Rutinas Incluidas</h5>
+    <ul>
+      <li>Rutinas para principiantes (10–20 min sin equipo)</li>
+      <li>Entrenamientos de fuerza para gimnasio</li>
+      <li>Cardio HIIT para quema de grasa</li>
+      <li>Rutinas de abdomen y core</li>
+      <li>Estiramientos y movilidad para mejorar postura</li>
+      <li>Planes semanales de entrenamiento</li>
+    </ul>
+
+  </section>
+
 </div>
 {% endblock %}
