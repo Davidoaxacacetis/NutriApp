@@ -11,6 +11,7 @@ USUARIOS_REGISTRADOS ={
         "apellido":"West"
     }
 }
+
 API_KEY = "udJqwbKLuDZTGgIEmmOlAre5tV47sjQ5ichJxxQO"
 
 tipos = {
@@ -48,8 +49,11 @@ def registrame():
     confirmarcontra = request.form.get("confirmarcontra")
     fecha_nacimiento = request.form.get("fecha_nacimiento")
     genero = request.form.get("genero")
-    peso = request.form.get("peso")
-    altura = request.form.get("altura")
+    
+    # Peso y altura ya en unidades correctas
+    peso = float(request.form.get("peso"))       # kg
+    altura = int(request.form.get("altura"))     # cm
+
     objetivos = request.form.get("objetivos")
     alergias = request.form.get("alergias")
     intolerancias = request.form.get("intolerancias")
@@ -72,7 +76,9 @@ def registrame():
     try:
         fecha_nacimiento_obj = datetime.strptime(fecha_nacimiento, "%Y-%m-%d")
         today = datetime.today()
-        edad = today.year - fecha_nacimiento_obj.year - ((today.month, today.day) < (fecha_nacimiento_obj.month, fecha_nacimiento_obj.day))
+        edad = today.year - fecha_nacimiento_obj.year - (
+            (today.month, today.day) < (fecha_nacimiento_obj.month, fecha_nacimiento_obj.day)
+        )
     except ValueError:
         flash("Fecha de nacimiento inválida", "error")
         return render_template("registro.html", **request.form)
@@ -139,10 +145,11 @@ def perfil():
     if not session.get("logueado"):
         return redirect(url_for("sesion"))
     
-    email = session.get("usuario_email")
+    email = session.get("usuario_email")   
     usuario = USUARIOS_REGISTRADOS.get(email)
     
-    return render_template("perfil.html", usuario=usuario)
+    return render_template("perfil.html", usuario=usuario, email=email)
+
 
 @app.route("/tasa")
 def Itmb():
@@ -154,15 +161,16 @@ def resul():
 
 @app.route("/calculadora", methods=["GET","POST"])
 def calcutmb():
-    peso = request.form.get("peso")
-    altura = request.form.get("altura")
-    edad = request.form.get("edad")
+    peso = float(request.form.get("peso"))
+    altura = float(request.form.get("altura"))  # cm
+    edad = float(request.form.get("edad"))
     genero = request.form.get("genero")
-    actividad =request.form.get("actividad")
+    actividad = request.form.get("actividad")
+
     if genero == "Hombre":
-        tmb = (10* float(peso))+(6.25 * float(altura)) - (5 * float(edad)) + 5
-    elif genero == "Mujer":
-        tmb = (10 * float(peso))+(6.25* float(altura)) - (5 * float(edad)) - 161
+        tmb = (10 * peso) + (6.25 * altura) - (5 * edad) + 5
+    else:
+        tmb = (10 * peso) + (6.25 * altura) - (5 * edad) - 161
 
     if actividad == "seden":
         Get = tmb * 1.2
@@ -173,7 +181,8 @@ def calcutmb():
     elif actividad == "alta":
         Get = tmb * 1.725
 
-    return render_template("tmb.html", v1=tmb, v2=Get)
+    return render_template("tmb.html", v1=round(tmb, 2), v2=round(Get, 2))
+
 
 @app.route("/daw")
 def Iimc():
@@ -182,7 +191,7 @@ def Iimc():
 @app.route("/resultadoimc", methods=["POST"])
 def calcuimc():
     peso = float(request.form.get("peso1"))
-    altura = float(request.form.get("altura1"))
+    altura = float(request.form.get("altura1")) / 100 
 
     imc = peso / (altura ** 2)
 
@@ -201,18 +210,17 @@ def calcuimc():
 
     return render_template("imc.html", v3=round(imc, 2), v4=niv)
 
+
 @app.route("/pesoideal", methods=["GET", "POST"])
 def pesoideal():
     resultado = None
     if request.method == "POST":
-        altura = float(request.form.get("altura")) / 100  
+        altura = float(request.form.get("altura"))   # cm
         genero = request.form.get("genero")
 
+        resultado = 50 + 2.3 * ((altura / 2.54) - 60) if genero == "Hombre" else \
+                    45.5 + 2.3 * ((altura / 2.54) - 60)
         
-        if genero == "Hombre":
-            resultado = 50 + 2.3 * ((altura * 100 / 2.54) - 60)
-        else:
-            resultado = 45.5 + 2.3 * ((altura * 100 / 2.54) - 60)
         resultado = round(resultado, 2)
 
     return render_template("pesoideal.html", resultado=resultado)
@@ -222,9 +230,10 @@ def macros():
     proteinas = grasas = carbohidratos = None
     if request.method == "POST":
         calorias = float(request.form.get("calorias"))
-        proteinas = round((calorias * 0.3) / 4, 1)      
-        grasas = round((calorias * 0.25) / 9, 1)        
-        carbohidratos = round((calorias * 0.45) / 4, 1) 
+
+        proteinas = round((calorias * 0.3) / 4, 1)
+        grasas = round((calorias * 0.25) / 9, 1)
+        carbohidratos = round((calorias * 0.45) / 4, 1)
 
     return render_template("macros.html", proteinas=proteinas, grasas=grasas, carbohidratos=carbohidratos)
 
@@ -237,13 +246,11 @@ def busqueda():
         url = f"https://api.nal.usda.gov/fdc/v1/foods/search?query={query}&api_key={API_KEY}"
         response = requests.get(url)
 
-
         if response.status_code == 200:
             data = response.json()
             alimentos = data.get("foods", [])
         else:
             alimentos = []
-
 
     return render_template("busqueda.html", alimentos=alimentos, query=query, tipos=tipos)
 
@@ -252,12 +259,10 @@ def detalle(fdc_id):
     url = f"https://api.nal.usda.gov/fdc/v1/food/{fdc_id}?api_key={API_KEY}"
     response = requests.get(url)
 
-
     if response.status_code == 200:
         data = response.json()
     else:
         data = None
-
 
     return render_template("detalle.html", alimento=data)
 
