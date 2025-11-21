@@ -50,9 +50,8 @@ def registrame():
     fecha_nacimiento = request.form.get("fecha_nacimiento")
     genero = request.form.get("genero")
     
-    # Peso y altura ya en unidades correctas
-    peso = float(request.form.get("peso"))       # kg
-    altura = int(request.form.get("altura"))     # cm
+    peso = float(request.form.get("peso"))       
+    altura = int(request.form.get("altura"))     
 
     objetivos = request.form.get("objetivos")
     alergias = request.form.get("alergias")
@@ -162,7 +161,7 @@ def resul():
 @app.route("/calculadora", methods=["GET","POST"])
 def calcutmb():
     peso = float(request.form.get("peso"))
-    altura = float(request.form.get("altura"))  # cm
+    altura = float(request.form.get("altura")) 
     edad = float(request.form.get("edad"))
     genero = request.form.get("genero")
     actividad = request.form.get("actividad")
@@ -184,7 +183,7 @@ def calcutmb():
     return render_template("tmb.html", v1=round(tmb, 2), v2=round(Get, 2))
 
 
-@app.route("/daw")
+@app.route("/Resultadoimc")
 def Iimc():
     return render_template("calcuimc.html")
 
@@ -215,7 +214,7 @@ def calcuimc():
 def pesoideal():
     resultado = None
     if request.method == "POST":
-        altura = float(request.form.get("altura"))   # cm
+        altura = float(request.form.get("altura"))   
         genero = request.form.get("genero")
 
         resultado = 50 + 2.3 * ((altura / 2.54) - 60) if genero == "Hombre" else \

@@ -1,31 +1,77 @@
-{% extends "base.html" %}
-
-{% block titulo %}Inicio{% endblock %}
-
-{% block contenido %}
+{% extends "base.html" %} {% block titulo %}Inicio{% endblock %} {% block
+contenido %}
 <main class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow p-4">
-                <h1 class="text-center mb-3">Examen</h1>
-                <h4 class="text-center mb-3">Calcudora de Gasto energetico (TMB Y GET)</h4>
-                <h6 class="text-center mb-4">Es fácil y rápido</h6>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow p-4">
+        <h1 class="text-center mb-3">Examen</h1>
+        <h4 class="text-center mb-3">
+          Calcudora de Gasto energetico (TMB Y GET)
+        </h4>
+        <h6 class="text-center mb-4">Es fácil y rápido</h6>
 
-                <form>
+        <form>
+          <div class="mb-3">
+            <h5>Tu TMB es:{{v2}} kcal/día</h5>
+            <h5>Tu GET es:{{v1}} kcal/día</h5>
+          </div>
 
-                    <div class="mb-3">
-                        <h5>Tu TMB es:{{v2}}</h5>
-                        <h5>Tu GET es:{{v1}}</h5>
-                    </div>
-
-                    <div class="text-center">
-                        <a href="{{ url_for('Itmb') }}" class="btn btn-primary rounded-pill">Calcular otro</a>
-                    </div>
-
-                </form>
-            </div>
-        </div>
+          <div class="text-center">
+            <a href="{{ url_for('Itmb') }}" class="btn btn-primary rounded-pill">Calcular otro</a>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
+  <section class="mb-5 p-4 bg-white text-dark rounded-4 shadow-sm">
+    <h2 class="fw-bold mb-3">Perfil del Usuario</h2>
 
+    <div class="banner" style="
+        width:100%;
+        height:220px;
+        background-image: url('{{ url_for('static', filename='img/nutricion.jpg') }}');
+        background-size: cover;
+        background-position: center;
+        border-radius: 20px;
+      "></div>
+
+    <p>
+      En esta sección el usuario puede registrar información personal que
+      permitirá generar recomendaciones nutricionales completamente
+      personalizadas.
+    </p>
+
+    <h5 class="mt-4">Datos Principales</h5>
+    <ul>
+      <li>Edad, sexo, peso, altura</li>
+      <li>Nivel de actividad física</li>
+      <li>Email, contraseña, nombre y apellidos</li>
+    </ul>
+
+    <h5 class="mt-4">Objetivos Personales</h5>
+    <p>El usuario puede seleccionar su objetivo principal, como:</p>
+    <ul>
+      <li>Bajar de peso</li>
+      <li>Ganar masa muscular</li>
+      <li>Mantener peso</li>
+      <li>Mejorar digestión</li>
+      <li>Controlar diabetes, hipertensión u otras condiciones</li>
+    </ul>
+
+    <h5 class="mt-4">Preferencias y Restricciones</h5>
+    <ul>
+      <li>Alergias: maní, mariscos, huevo, etc.</li>
+      <li>Intolerancias: lactosa, gluten</li>
+      <li>Dietas: Vegana, vegetariana, keto, mediterránea, paleo</li>
+      <li>Alimentos que el usuario no consume</li>
+    </ul>
+
+    <h5 class="mt-4">Nivel de Experiencia en Cocina</h5>
+    <ul>
+      <li>Principiante: conoce lo básico</li>
+      <li>Intermedio: puede seguir recetas</li>
+      <li>Avanzado: cocina creativa, tipo chef</li>
+    </ul>
+  </section>
 </main>
 {% endblock %}

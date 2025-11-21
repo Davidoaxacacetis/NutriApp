@@ -6,52 +6,38 @@
 <main class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card shadow p-4">
-                <h1 class="text-center mb-3">TMB y GET</h1>
-                <h4 class="text-center mb-3">Calculadora de Gasto Energético (TMB y GET)</h4>
+            <div class="card shadow p-4 mb-5">
+                <h1 class="text-center mb-3">TMB y GCT</h1>
+                <h4 class="text-center mb-3">Calculadora de Gasto Energético (TMB y GCT)</h4>
                 <h6 class="text-center mb-4">Es fácil y rápido</h6>
 
                 <form method="post" action="{{ url_for('calcutmb') }}">
 
                     <div class="mb-3">
                         <label for="peso" class="form-label">Peso</label>
-                        <input 
-                            class="form-control rounded-pill" 
-                            name="peso" 
-                            id="peso" 
-                            placeholder="Peso (kg)" 
-                            required
-                        >
+                        <input class="form-control rounded-pill" name="peso" id="peso" placeholder="Peso (kg)" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="altura" class="form-label">Altura</label>
-                        <input 
-                            class="form-control rounded-pill" 
-                            name="altura" 
-                            id="altura" 
-                            placeholder="Altura (cm)" 
-                            required
-                        >
+                        <input class="form-control rounded-pill" name="altura" id="altura" placeholder="Altura (cm)"
+                            required>
                     </div>
 
                     <div class="mb-3">
                         <label for="edad" class="form-label">Edad</label>
-                        <input 
-                            class="form-control rounded-pill" 
-                            name="edad" 
-                            id="edad" 
-                            placeholder="Edad (años)" 
-                            required
-                        >
+                        <input class="form-control rounded-pill" name="edad" id="edad" placeholder="Edad (años)"
+                            required>
                     </div>
 
                     <div class="mb-3">
                         <label for="genero" class="form-label">Género</label>
                         <select class="form-select rounded-pill" name="genero" id="genero" required>
                             <option value="">Selecciona tu género</option>
-                            <option value="Hombre" {% if request.form.get('genero')=='Hombre' %}selected{% endif %}>Hombre</option>
-                            <option value="Mujer" {% if request.form.get('genero')=='Mujer' %}selected{% endif %}>Mujer</option>
+                            <option value="Hombre" {% if request.form.get('genero')=='Hombre' %}selected{% endif %}>
+                                Hombre</option>
+                            <option value="Mujer" {% if request.form.get('genero')=='Mujer' %}selected{% endif %}>Mujer
+                            </option>
                         </select>
                     </div>
 
@@ -68,7 +54,8 @@
                                 Ligera (Ejercicio 1–3 días/semana)
                             </option>
 
-                            <option value="moderada" {% if request.form.get('actividad')=='moderada' %}selected{% endif %}>
+                            <option value="moderada" {% if request.form.get('actividad')=='moderada' %}selected{% endif
+                                %}>
                                 Moderada (Ejercicio 3–5 días/semana)
                             </option>
 
@@ -86,6 +73,78 @@
             </div>
         </div>
     </div>
+
+    <section class="mb-5 mx-4 p-4 bg-white text-dark rounded-4 shadow-sm">
+
+        <h2 class="fw-bold mb-3">Articulo informativo</h2>
+
+        <h3>
+            ¿Qué es la Tasa Metabólica Basal y por qué es clave para tu nutrición?
+        </h3>
+
+        <p>La Tasa Metabólica Basal (TMB) es el pilar de la nutrición y el fitness.<strong>Es la pieza central</strong>.
+            Dicho de forma
+            simple, es la energía mínima, medida en calorías, que tu cuerpo requiere para seguir vivo: respirar,
+            mantener la temperatura, hacer circular la sangre… todo mientras estás en reposo absoluto.</p>
+
+        <h3>¿Por qué deberías saber tu TMB?</h3>
+
+        <p>Simple. Conocer cuántas calorías quemas solo por existir te da la luz verde para crear planes de alimentación
+            que realmente funcionen. Podrás establecer objetivos de peso <strong>realistas</strong> y, sobre todo,
+            evitar esas dietas extremas que, a largo plazo, acaban reventando el metabolismo. Por cierto, si a tu TMB le
+            sumas tu nivel de actividad, obtienes el <strong>Gasto Calórico Total (GCT)</strong>, también conocido como
+            TDEE. Esta es la base de todo plan efectivo.</p>
+
+        <h3>Fórmulas Científicas: ¿La Mifflin o la Harris?</h3>
+
+        <h5>Hay varias ecuaciones para calcularla. Las dos de referencia son:</h5>
+
+        <p><strong>Mifflin-St Jeor (1990): Ojo con esta.</strong> Estudios recientes (como el publicado en el Journal of
+            the American Dietetic Association en 2005) confirman que es más precisa para la población actual, sobre todo
+            en personas con peso normal u obesidad.</p>
+
+        <p><strong>Harris-Benedict (1919, revisada en 1984):</strong> Fue la pionera, sin duda, pero tiene un fallo:
+            tiende a sobreestimar la TMB en gente con menos masa corporal. Por eso, si tienes que elegir, la mayoría de
+            los nutricionistas te dirán que la fórmula de Mifflin-St Jeor es el <strong> estándar inicial.</strong></p>
+
+        <h3>¿Cómo se Calcula?</h3>
+
+        <p>Así funciona la fórmula de Mifflin-St Jeor:</p>
+
+        <p>Hombres: TMB = (10 × peso en kg) + (6.25 × altura en cm) – (5 × edad) + 5</p>
+
+        <p>Mujeres: TMB = (10 × peso en kg) + (6.25 × altura en cm) – (5 × edad) – 161</p>
+
+        <p>Una vez tienes el número, solo queda multiplicarlo por el factor de actividad y listo: ya tienes tu GCT.</p>
+
+        <h3>El Contexto de los Datos</h3>
+
+        <p>Aquí lo que pasa es que mucha gente no tiene idea de su gasto real. Según la OMS, más del 50% de los adultos
+            en países desarrollados tienen un desajuste entre lo que comen y lo que queman. No es solo teoría: un
+            estudio de Harvard (2020) mostró que las personas que ajustaron su dieta usando su TMB lograron pérdidas de
+            peso <strong>un 30% más sostenibles</strong> que las que seguían dietas genéricas.</p>
+
+        <h3>Consejos y Buenas Prácticas</h3>
+        <ul>
+            <li><strong>No te fíes solo de la calculadora:</strong> Úsala solo como <strong>punto de partida.</strong> Luego, ajusta sí o sí según tu
+                progreso (cómo te sientes, tu rendimiento y el peso real).</li>
+            <li><strong>Combina la TMB con la composición corporal:</strong> La báscula no cuenta toda la historia. Usa bioimpedancia o
+                cintas métricas para ver si estás ganando músculo o perdiendo grasa.</li>
+            <li><strong>Prioriza la calidad sobre la cantidad:</strong> 1.800 kcal de comida real no son 1.800 kcal de ultraprocesados.
+                Esto es <strong>clave.</strong></li>
+            <li><strong>Reevalúa cada cierto tiempo (3–6 meses):</strong> Tu TMB se mueve. Cambia con la edad, el peso y, sobre todo, si
+                has modificado tu composición corporal.</li>
+        </ul>
+
+        <h3>Límites que debes tener claros</h3>
+
+        <p>Esta fórmula no aplica si estás en embarazo o lactancia, si tienes enfermedades metabólicas graves, o si eres un atleta de élite sin supervisión. Tampoco olvides esto: el estrés, el sueño y las hormonas impactan en tu gasto energético real y las fórmulas sencillamente <strong>no capturan esos factores.</strong></p>
+
+        <p>Antes de tomar cualquier decisión drástica, siempre, <strong>siempre</strong>, consulta a un nutricionista colegiado.</p>
+
+        <p>Entender tu TMB y GCT te da la <strong>ventaja incial</strong>. Usa esta calculadora como una herramienta <strong>práctica</strong> y combínala con hábitos saludables. El verdadero trabajo está en escuchar a tu cuerpo.<strong>Punto</strong>.</p>
+
+    </section>
 
 </main>
 {% endblock %}
