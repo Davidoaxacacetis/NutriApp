@@ -36,6 +36,10 @@ def acecade():
 def articulos():
     return render_template('articulos.html')
 
+@app.route('/rutinas')
+def rutinas():
+    return render_template('rutinas.html')
+
 @app.route("/registrate")
 def registro():
     return render_template("registro.html", request=request)
