@@ -213,17 +213,23 @@ def calcuimc():
 @app.route("/pesoideal", methods=["GET", "POST"])
 def pesoideal():
     resultado = None
+    rango = None
     if request.method == "POST":
         altura = float(request.form.get("altura"))   
         genero = request.form.get("genero")
 
-        resultado = 50 + 2.3 * ((altura / 2.54) - 60) if genero == "Hombre" else \
-                    45.5 + 2.3 * ((altura / 2.54) - 60)
+        if genero == "Hombre":
+            peso_ideal = 50 + 0.91 * ((altura / 2.54) - 60)
+        else:
+            peso_ideal = 45.5 + 0.91 * ((altura / 2.54) - 60)
         
-        resultado = round(resultado, 2)
+        peso_minimo = round(peso_ideal - 5, 2)
+        peso_maximo = round(peso_ideal + 5, 2)
+        
+        resultado = round(peso_ideal, 2)
+        rango = (peso_minimo, peso_maximo)
 
-    return render_template("pesoideal.html", resultado=resultado)
-
+    return render_template("pesoideal.html", resultado=resultado, rango=rango)
 @app.route("/macros", methods=["GET", "POST"])
 def macros():
     proteinas = grasas = carbohidratos = None

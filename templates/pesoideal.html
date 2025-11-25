@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+
 {% block titulo %}Peso Corporal Ideal{% endblock %}
 
 {% block header %}
 <div class="text-center mt-5 pt-5">
     <h1>Calculadora de Peso Ideal ⚖️</h1>
-    <p class="lead">Conoce tu rango de peso saludable según tu estatura.</p>
+    <p class="lead">Conoce si tu peso está dentro del rango saludable según tu estatura.</p>
 </div>
 {% endblock %}
 
@@ -28,7 +29,24 @@
     {% if resultado %}
     <div class="alert alert-info text-center mt-4">
         <strong>Tu peso ideal es:</strong> {{ resultado }} kg
+        <br>
+        <strong>Rango saludable:</strong> {{ rango[0] }} kg - {{ rango[1] }} kg
     </div>
     {% endif %}
+</div>
+
+<div class="container col-md-6 mt-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <h3 class="card-title text-center">¿Qué es el Peso Ideal?</h3>
+            <p class="card-text">
+                El **peso ideal** es un rango de peso que se considera saludable según tu **altura** y **género**. No existe un único valor para todos, ya que depende de tu contextura, pero esta calculadora te da una estimación.
+            </p>
+            <h5>¿Tu peso está en el rango ideal?</h5>
+            <p>
+                Si tu peso calculado se encuentra dentro del rango recomendado, ¡felicidades! Estás dentro de un peso saludable. Si está por debajo o por encima, te recomendamos consultar con un profesional de la salud para ajustarlo.
+            </p>
+        </div>
+    </div>
 </div>
 {% endblock %}

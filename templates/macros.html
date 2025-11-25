@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block titulo %}Calculadora de Macronutrientes{% endblock %}
 
 {% block header %}
@@ -25,5 +26,24 @@
         <strong>Carbohidratos:</strong> {{ carbohidratos }} g
     </div>
     {% endif %}
+</div>
+
+<div class="container col-md-6 mt-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <h3 class="card-title text-center">¿Qué son los Macronutrientes?</h3>
+            <p class="card-text">
+                Los **macronutrientes** son nutrientes esenciales que el cuerpo necesita en grandes cantidades para funcionar correctamente. Se dividen en tres grupos: <strong>proteínas</strong>, <strong>grasas</strong> y <strong>carbohidratos</strong>.
+            </p>
+            <ul>
+                <li><strong>Proteínas:</strong> Ayudan a la reparación y crecimiento muscular. Se encuentran en alimentos como carnes, legumbres y frutos secos.</li>
+                <li><strong>Grasas:</strong> Proveen energía, protegen los órganos y ayudan a absorber vitaminas. Fuentes de grasas saludables incluyen aguacates, aceite de oliva y nueces.</li>
+                <li><strong>Carbohidratos:</strong> Son la principal fuente de energía para el cuerpo, especialmente durante actividades físicas intensas. Se encuentran en alimentos como pan, arroz, frutas y verduras.</li>
+            </ul>
+            <p>
+                Un balance adecuado de estos macronutrientes es clave para mantener un estilo de vida saludable y optimizar el rendimiento físico.
+            </p>
+        </div>
+    </div>
 </div>
 {% endblock %}
