@@ -10,7 +10,7 @@ Crear una API
 
 **Grupo:** 3 - D
 
-**Matricla:** 24308060610040
+**Matricula:** 24308060610040
 
 **Especialidad:** Programacion
 
@@ -22,7 +22,7 @@ Crear una API
 
 **Grupo:** 3 - D
 
-**Matricla:** 24308060610041
+**Matricula:** 24308060610041
 
 **Especialidad:** Programacion
 
