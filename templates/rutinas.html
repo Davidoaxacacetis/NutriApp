@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block titulo %}Rutinas y ejercicios{% endblock %}
+
+{% block header %}
+<div class="text-center mt-5 pt-5">
+    <h1><strong>Rutinas y ejercicios 🏋️</strong></h1>
+    <p class="lead">Descubre rutinas efectivas, ejercicios esenciales y recomendaciones para mejorar tu rendimiento físico.</p>
+</div>
+{% endblock %}
+
+{% block contenido %}
+<div class="container my-5">
+
+    <section class="mb-5 p-4 bg-light text-dark rounded shadow-sm">
+        <h2 class="fw-bold">¿Por qué entrenar de forma correcta?</h2>
+        <p>
+            Una rutina bien estructurada es clave para ganar músculo, perder grasa y mejorar la salud general.
+            Entrenar con buena técnica, elegir los ejercicios adecuados y mantener una progresión constante
+            son elementos esenciales para obtener resultados reales sin riesgo de lesiones.
+        </p>
+        <p>
+            En esta sección encontrarás rutinas recomendadas por expertos, ejercicios evaluados de mejor a peor
+            y planes escritos que puedes seguir desde casa o desde el gimnasio.
+        </p>
+    </section>
+
+
+    <div class="row gy-4">
+
+        <div class="col-12">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h3 class="card-title">Rutina de Jeff Nippard</h3>
+                    <h5 class="card-text">Cómo desarrollar músculo y perder grasa al mismo tiempo</h5>
+
+                    <div class="d-flex justify-content-center">
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/M4K0s792wAU?si=lTOpNHmaz21kz6t0"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h3 class="card-title">Jeff Nippard & Jesse James West</h3>
+                    <h5 class="card-text">Los mejores ejercicios evaluados de peor a mejor</h5>
+
+                    <div class="d-flex justify-content-center">
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/vD-dEl7R2Bg?si=UJSpOocQCO7XBhEE"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <h2 class="fw-bold mt-5 mb-3 text-center">Ejercicios recomendados</h2>
+    <div class="row gy-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h4 class="card-title">Sentadilla (Squat)</h4>
+                    <p>Ejercicio fundamental para desarrollar piernas y glúteos. Trabaja cuádriceps, femorales y core.</p>
+                    <ul>
+                        <li>3–4 series</li>
+                        <li>6–10 repeticiones</li>
+                        <li>Progresión: +2.5 kg cada semana</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h4 class="card-title">Press banca</h4>
+                    <p>Fortalece el pecho, hombros y tríceps. Ideal para ganar fuerza y masa muscular.</p>
+                    <ul>
+                        <li>3–5 series</li>
+                        <li>5–8 repeticiones</li>
+                        <li>Descanso: 2–3 minutos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h4 class="card-title">Peso muerto (Deadlift)</h4>
+                    <p>Ejercicio completo que trabaja espalda baja, glúteos, femorales y agarre.</p>
+                    <ul>
+                        <li>2–3 series</li>
+                        <li>3–6 repeticiones</li>
+                        <li>Ideal para fuerza y desarrollo posterior</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="mt-5 p-4 bg-white text-dark shadow-sm rounded">
+        <h2 class="fw-bold mb-4">Rutina ejemplo de 4 días</h2>
+
+        <h4>Día 1 – Pecho y tríceps</h4>
+        <ul>
+            <li>Press banca: 4×6–8</li>
+            <li>Press inclinado con mancuernas: 3×8–10</li>
+            <li>Fondos: 3×10–12</li>
+            <li>Extensiones de tríceps: 3×12–15</li>
+        </ul>
+
+        <h4>Día 2 – Piernas</h4>
+        <ul>
+            <li>Sentadilla: 4×6–10</li>
+            <li>Prensa: 3×10–12</li>
+            <li>Peso muerto rumano: 3×8</li>
+            <li>Gemelos: 4×15</li>
+        </ul>
+
+        <h4>Día 3 – Espalda y bíceps</h4>
+        <ul>
+            <li>Dominadas: 4×6–10</li>
+            <li>Remo con barra: 4×8</li>
+            <li>Jalón al pecho: 3×10</li>
+            <li>Curll de bíceps: 3×12</li>
+        </ul>
+
+        <h4>Día 4 – Hombro y core</h4>
+        <ul>
+            <li>Press militar: 4×6–8</li>
+            <li>Elevaciones laterales: 3×12–15</li>
+            <li>Face pulls: 3×15</li>
+            <li>Planchas: 3×1 min</li>
+        </ul>
+    </section>
+
+</div>
+{% endblock %}

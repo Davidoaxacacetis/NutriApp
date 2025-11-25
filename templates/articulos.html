@@ -1,80 +1,135 @@
-{% extends "base.html" %}
-
-{% block titulo %}Artículos Educativos{% endblock %}
-
+{% extends "base.html" %} {% block titulo %}Artículos Educativos{% endblock %}
 {% block header %}
 <div class="text-center mt-5 pt-5">
-    <h1><strong>Artículos Educativos sobre Nutrición 🥦</strong></h1>
-    <p class="lead">Aprende más sobre alimentación saludable y hábitos de bienestar.</p>
+  <h1><strong>Artículos Educativos sobre Nutrición 🥦</strong></h1>
+  <p class="lead">
+    Aprende más sobre alimentación saludable y hábitos de bienestar.
+  </p>
 </div>
-{% endblock %}
-
-{% block contenido %}
+{% endblock %} {% block contenido %}
 <div class="container my-5">
-    <div class="row gy-4">
-        <div class="col-12">
-            <div class="card shadow-sm border-0">
-                <div class="card-body">
-                    <h3 class="card-title">🥫 ¿Cómo leer las etiquetas nutricionales?</h3>
-                    <p class="card-text">
-                        Las etiquetas nutricionales son una herramienta clave para tomar decisiones saludables.
-                        En ellas se indica la cantidad de calorías, grasas, azúcares, sodio y otros nutrientes por porción.
-                    </p>
-                    <ul>
-                        <li>Revisa primero el tamaño de la porción.</li>
-                        <li>Observa el porcentaje de valor diario (%VD).</li>
-                        <li>Prefiere productos bajos en grasas saturadas, azúcares añadidos y sodio.</li>
-                        <li>Fíjate en los ingredientes: están ordenados de mayor a menor cantidad.</li>
-                    </ul>
-                </div>
-            </div>
+  <div class="row gy-4">
+    <div class="col-12">
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <h3 class="card-title">🥫 ¿Cómo leer las etiquetas nutricionales?</h3>
+          <p class="card-text">
+            Las etiquetas nutricionales son una herramienta clave para tomar
+            decisiones saludables. En ellas se indica la cantidad de calorías,
+            grasas, azúcares, sodio y otros nutrientes por porción.
+          </p>
+          <ul>
+            <li>Revisa primero el tamaño de la porción.</li>
+            <li>Observa el porcentaje de valor diario (%VD).</li>
+            <li>
+              Prefiere productos bajos en grasas saturadas, azúcares añadidos y
+              sodio.
+            </li>
+            <li>
+              Fíjate en los ingredientes: están ordenados de mayor a menor
+              cantidad.
+            </li>
+          </ul>
         </div>
-
-        <div class="col-12">
-            <div class="card shadow-sm border-0">
-                <div class="card-body">
-                    <h3 class="card-title">🥗 Mitos y verdades sobre las dietas de moda</h3>
-                    <p class="card-text">
-                        Las dietas populares suelen prometer resultados rápidos, pero no todas son seguras ni sostenibles.
-                    </p>
-                    <ul>
-                        <li><strong>Mito:</strong> “Las dietas sin carbohidratos son las mejores” ❌</li>
-                        <li><strong>Mito:</strong> “Comer después de las 8 p.m. engorda” ❌</li>
-                        <li><strong>Verdad:</strong> Una alimentación equilibrada y variada es siempre la mejor opción.</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="text-center">
+          <img src="{{ url_for('static', filename='img/nutritionlabel_524157.jpg') }}" alt="Etiqueta nutricional"
+            class="img-fluid rounded my-4 mx-auto d-block" style="max-width: 700px" />
         </div>
-
-        <div class="col-12">
-            <div class="card shadow-sm border-0">
-                <div class="card-body">
-                    <h3 class="card-title">🍳 Guía sobre macronutrientes y su función</h3>
-                    <ul>
-                        <li><strong>Carbohidratos:</strong> fuente principal de energía (pan, arroz, frutas).</li>
-                        <li><strong>Proteínas:</strong> reparan tejidos y forman músculos (pollo, huevo, legumbres).</li>
-                        <li><strong>Grasas saludables:</strong> protegen órganos y ayudan a absorber vitaminas.</li>
-                    </ul>
-                    <p>Un equilibrio entre ellos es esencial para el bienestar físico y mental.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12">
-            <div class="card shadow-sm border-0">
-                <div class="card-body">
-                    <h3 class="card-title">💧 La importancia de la hidratación, la fibra y otros elementos</h3>
-                    <p>
-                        El agua y la fibra son aliados indispensables para la salud.
-                    </p>
-                    <ul>
-                        <li><strong>Hidratación:</strong> regula la temperatura corporal y transporta nutrientes.</li>
-                        <li><strong>Fibra:</strong> mejora la digestión, controla el apetito y reduce el colesterol.</li>
-                        <li><strong>Micronutrientes:</strong> vitaminas y minerales mantienen el equilibrio del organismo.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+
+    <div class="col-12">
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <h3 class="card-title">
+            🥗 Mitos y verdades sobre las dietas de moda
+          </h3>
+          <p class="card-text">
+            Las dietas populares suelen prometer resultados rápidos, pero no
+            todas son seguras ni sostenibles.
+          </p>
+          <ul>
+            <li>
+              <strong>Mito:</strong> “Las dietas sin carbohidratos son las
+              mejores” ❌
+            </li>
+            <li>
+              <strong>Mito:</strong> “Comer después de las 8 p.m. engorda” ❌
+            </li>
+            <li>
+              <strong>Verdad:</strong> Una alimentación equilibrada y variada es
+              siempre la mejor opción.
+            </li>
+          </ul>
+        </div>
+        <div class="text-center">
+          <img src="{{ url_for('static', filename='img/dieta.webp') }}" alt="Dieta"
+            class="img-fluid rounded my-4 mx-auto d-block" style="max-width: 700px; width: 100%;" />
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <h3 class="card-title">🍳 Guía sobre macronutrientes y su función</h3>
+          <ul>
+            <li>
+              <strong>Carbohidratos:</strong> fuente principal de energía (pan,
+              arroz, frutas).
+            </li>
+            <li>
+              <strong>Proteínas:</strong> reparan tejidos y forman músculos
+              (pollo, huevo, legumbres).
+            </li>
+            <li>
+              <strong>Grasas saludables:</strong> protegen órganos y ayudan a
+              absorber vitaminas.
+            </li>
+          </ul>
+          <p>
+            Un equilibrio entre ellos es esencial para el bienestar físico y
+            mental.
+          </p>
+        </div>
+        <div class="text-center">
+          <img src="{{ url_for('static', filename='img/macro.webp') }}" alt="macronutrientes"
+            class="img-fluid rounded my-4 mx-auto d-block" style="max-width: 700px; width: 100%;" />
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <h3 class="card-title">
+            💧 La importancia de la hidratación, la fibra y otros elementos
+          </h3>
+          <p>El agua y la fibra son aliados indispensables para la salud.</p>
+          <ul>
+            <li>
+              <strong>Hidratación:</strong> regula la temperatura corporal y
+              transporta nutrientes.
+            </li>
+            <li>
+              <strong>Fibra:</strong> mejora la digestión, controla el apetito y
+              reduce el colesterol.
+            </li>
+            <li>
+              <strong>Micronutrientes:</strong> vitaminas y minerales mantienen
+              el equilibrio del organismo.
+            </li>
+          </ul>
+        </div>
+        <div class="text-center">
+          <img src="{{ url_for('static', filename='img/hidratacion.webp') }}" alt="hidratación"
+            class="img-fluid rounded my-4 mx-auto d-block" style="max-width: 700px; width: 100%;" />
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

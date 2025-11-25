@@ -28,10 +28,6 @@ app.config['SECRET_KEY'] = "OODA"
 def index():
     return render_template("index.html")
 
-@app.route("/acerca-de")
-def acecade():
-    return render_template("acercade.html")
-
 @app.route('/articulos')
 def articulos():
     return render_template('articulos.html')
