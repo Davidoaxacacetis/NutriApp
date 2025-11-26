@@ -1,23 +1,27 @@
 {% extends "base.html" %}
 
-{% block titulo %}Analizador de Recetas{% endblock %}
+{% block titulo %}Resultados de la Receta{% endblock %}
 
 {% block contenido %}
-<div class="container mt-5">
+<div class="container mt-4">
     <div class="card p-4 shadow">
-        <h2 class="text-center">Analizador de Ingredientes (USDA)</h2>
+        <h3 class="text-center">Resultado del análisis</h3>
 
-        <form action="/analizar" method="POST" class="mt-3">
-            <label for="ingrediente">Ingresa un ingrediente:</label>
-            <input type="text" name="ingrediente" class="form-control" required
-                   placeholder="Ejemplo: egg, milk, banana">
+        <p><strong>Ingrediente:</strong> {{ ingrediente }}</p>
 
-            <button class="btn btn-primary mt-3 w-100">Analizar</button>
-        </form>
+        {% if error %}
+            <p class="text-danger">No se encontraron datos del ingrediente.</p>
+        {% else %}
+            <h4>Nutrientes:</h4>
+            <ul>
+                {% for nombre, valor in nutrientes.items() %}
+                    <li>{{ nombre }}: {{ valor }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </div>
 </div>
-
-    <div class="container mt-4">
+<div class="container mt-4">
     <div class="card shadow">
         <div class="card-body">
             <h3 class="card-title text-center mb-3">🔍 ¿Cómo funciona el Analizador de Recetas?</h3>
@@ -61,5 +65,4 @@
     </div>
 </div>
 
-</div>
 {% endblock %}

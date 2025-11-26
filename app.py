@@ -13,6 +13,7 @@ USUARIOS_REGISTRADOS ={
 }
 
 API_KEY = "udJqwbKLuDZTGgIEmmOlAre5tV47sjQ5ichJxxQO"
+USDA_URL = "https://api.nal.usda.gov/fdc/v1/foods/search"
 
 tipos = {
 "Branded": "Producto de marca comercial",
@@ -270,6 +271,68 @@ def detalle(fdc_id):
         data = None
 
     return render_template("detalle.html", alimento=data)
+
+def obtener_nutrientes(nombre):
+    params = {
+        "api_key": API_KEY,
+        "query": nombre,
+        "pageSize": 1
+    }
+
+    resp = requests.get(USDA_URL, params=params)
+    data = resp.json()
+
+    if "foods" not in data or len(data["foods"]) == 0:
+        return None
+
+    food = data["foods"][0]
+
+    nutrientes = {
+        "Proteína (g)": 0,
+        "Grasa (g)": 0,
+        "Carbohidratos (g)": 0,
+        "Calorías": 0
+    }
+
+    for n in food.get("foodNutrients", []):
+        nombre_n = n.get("nutrientName", "")
+        valor = n.get("value")
+
+        if valor is None:
+            continue
+
+        if nombre_n == "Protein":
+            nutrientes["Proteína (g)"] = valor
+        elif nombre_n == "Total lipid (fat)":
+            nutrientes["Grasa (g)"] = valor
+        elif nombre_n == "Carbohydrate, by difference":
+            nutrientes["Carbohidratos (g)"] = valor
+        elif nombre_n == "Energy":
+            nutrientes["Calorías"] = valor
+
+    return nutrientes
+
+@app.route("/analizador")
+def analizador():
+    return render_template("analizador.html")
+
+
+@app.route("/analizar", methods=["POST"])
+def analizar():
+    ingrediente = request.form.get("ingrediente")
+
+    datos = obtener_nutrientes(ingrediente)
+
+    if datos is None:
+        return render_template("resultado.html", ingrediente=ingrediente, error=True)
+
+    for k in datos:
+        datos[k] = round(datos[k], 2)
+
+    return render_template("resultado.html",
+                           ingrediente=ingrediente,
+                           nutrientes=datos,
+                           error=False)
 
 if __name__ == '__main__':
     app.run(debug=True)
