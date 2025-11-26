@@ -329,10 +329,7 @@ def analizar():
     for k in datos:
         datos[k] = round(datos[k], 2)
 
-    return render_template("resultado.html",
-                           ingrediente=ingrediente,
-                           nutrientes=datos,
-                           error=False)
+    return render_template("resultado.html",ingrediente=ingrediente,nutrientes=datos,error=False)
 
 if __name__ == '__main__':
     app.run(debug=True)
