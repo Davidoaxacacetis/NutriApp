@@ -46,7 +46,7 @@
               <li>
                 <a class="dropdown-item" href="{{ url_for('busqueda') }}">Buscar alimento</a>
               </li>
-             <li>
+              <li>
                 <a class="dropdown-item" href="{{ url_for('analizador') }}">Analizador de recetas</a>
               </li>
             </ul>
@@ -69,15 +69,34 @@
           </li>
 
           {% else %}
+
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('index') }}">Inicio</a>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="herrDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Herramientas
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="herrDropdown">
+              <li>
+                <a class="dropdown-item" href="{{ url_for('Iimc') }}">Calculadora IMC</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{{ url_for('Itmb') }}">Tasa Metabólica Basal (TMB)</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{{ url_for('pesoideal') }}">Peso Corporal Ideal</a>
+              </li>
+            </ul>
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('sesion') }}">Iniciar sesión</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('registro') }}">Registrarse</a>
           </li>
+
           {% endif %}
         </ul>
       </div>
