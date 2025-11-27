@@ -8,34 +8,35 @@
         <h2 class="text-center">Analizador de Ingredientes (USDA)</h2>
 
         <form action="/analizar" method="POST" class="mt-3">
-            <label for="ingrediente">Ingresa un ingrediente:</label>
+            <label for="ingrediente">Ingresa el nombre de la receta:</label>
             <input type="text" name="ingrediente" class="form-control" required
-                   placeholder="Ejemplo: egg, milk, banana">
+                placeholder="Ejemplo: enchiladas, pasta con queso, hot cakes">
 
             <button class="btn btn-primary mt-3 w-100">Analizar</button>
         </form>
+
     </div>
 </div>
 
-    <div class="container mt-4">
+<div class="container mt-4">
     <div class="card shadow">
         <div class="card-body">
             <h3 class="card-title text-center mb-3">🔍 ¿Cómo funciona el Analizador de Recetas?</h3>
             <p class="card-text">
-                El analizador de recetas interpreta automáticamente cada ingrediente 
-                que escribas, identifica su cantidad, unidad y nombre, y lo convierte 
+                El analizador de recetas interpreta automáticamente cada ingrediente
+                que escribas, identifica su cantidad, unidad y nombre, y lo convierte
                 a gramos usando una tabla interna de equivalencias.
             </p>
 
             <p class="card-text">
-                Después, se conecta a la <strong>API oficial del USDA</strong> para buscar 
-                el alimento real dentro de su base de datos nutricional. Si el primer resultado 
-                no contiene macronutrientes, analiza más resultados hasta encontrar uno que 
+                Después, se conecta a la <strong>API oficial del USDA</strong> para buscar
+                el alimento real dentro de su base de datos nutricional. Si el primer resultado
+                no contiene macronutrientes, analiza más resultados hasta encontrar uno que
                 incluya proteína, carbohidratos y grasas.
             </p>
 
             <p class="card-text">
-                Finalmente, calcula los nutrientes basándose en la cantidad en gramos 
+                Finalmente, calcula los nutrientes basándose en la cantidad en gramos
                 que escribiste y te muestra:
             </p>
 
@@ -47,7 +48,7 @@
             </ul>
 
             <p class="card-text">
-                También genera <strong>totales de la receta completa</strong> para que puedas ver 
+                También genera <strong>totales de la receta completa</strong> para que puedas ver
                 el aporte nutricional real de todo el platillo.
             </p>
 

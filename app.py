@@ -247,14 +247,21 @@ def macros():
 def busqueda():
     alimentos = []
     query = ""
+
     if request.method == "POST":
-        query = request.form["query"]
+        query = request.form["query"].lower()
+
         url = f"https://api.nal.usda.gov/fdc/v1/foods/search?query={query}&api_key={API_KEY}"
         response = requests.get(url)
 
         if response.status_code == 200:
             data = response.json()
-            alimentos = data.get("foods", [])
+            resultados = data.get("foods", [])
+
+            alimentos = [
+                f for f in resultados
+                if query in f.get("description", "").lower()
+            ]
         else:
             alimentos = []
 
@@ -319,17 +326,18 @@ def analizador():
 
 @app.route("/analizar", methods=["POST"])
 def analizar():
-    ingrediente = request.form.get("ingrediente")
+    receta = request.form.get("ingrediente")
 
-    datos = obtener_nutrientes(ingrediente)
+    datos = obtener_nutrientes(receta)
 
     if datos is None:
-        return render_template("resultado.html", ingrediente=ingrediente, error=True)
+        return render_template("resultado.html", ingrediente=receta, error=True)
 
     for k in datos:
         datos[k] = round(datos[k], 2)
 
-    return render_template("resultado.html",ingrediente=ingrediente,nutrientes=datos,error=False)
+    return render_template("resultado.html", ingrediente=receta, nutrientes=datos, error=False)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
