@@ -327,17 +327,19 @@ def analizador():
 def analizar():
     receta = request.form.get("ingrediente")
 
-    resultado = obtener_nutrientes(receta)
+    datos = obtener_nutrientes(receta)
 
-    if resultado is None:
+    if datos is None:
         return render_template("resultado.html", ingrediente=receta, error=True)
-
-    datos, porcion = resultado
 
     for k in datos:
         datos[k] = round(datos[k], 2)
 
-    return render_template("resultado.html",ingrediente=receta,nutrientes=datos,porcion=porcion,error=False)
+    return render_template("resultado.html",
+                            ingrediente=receta,
+                            nutrientes=datos,
+                            error=False)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
