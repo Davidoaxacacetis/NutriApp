@@ -324,6 +324,47 @@ def obtener_nutrientes(nombre):
         elif nombre_n == "Energy":
             nutrientes["Calorías"] = valor
 
+    porcion = 100  
+
+    return nutrientes, porcion
+
+    params = {
+        "api_key": API_KEY,
+        "query": nombre,
+        "pageSize": 1
+    }
+
+    resp = requests.get(USDA_URL, params=params)
+    data = resp.json()
+
+    if "foods" not in data or len(data["foods"]) == 0:
+        return None
+
+    food = data["foods"][0]
+
+    nutrientes = {
+        "Proteína (g)": 0,
+        "Grasa (g)": 0,
+        "Carbohidratos (g)": 0,
+        "Calorías": 0
+    }
+
+    for n in food.get("foodNutrients", []):
+        nombre_n = n.get("nutrientName", "")
+        valor = n.get("value")
+
+        if valor is None:
+            continue
+
+        if nombre_n == "Protein":
+            nutrientes["Proteína (g)"] = valor
+        elif nombre_n == "Total lipid (fat)":
+            nutrientes["Grasa (g)"] = valor
+        elif nombre_n == "Carbohydrate, by difference":
+            nutrientes["Carbohidratos (g)"] = valor
+        elif nombre_n == "Energy":
+            nutrientes["Calorías"] = valor
+
     return nutrientes
 
 @app.route("/analizador")
@@ -334,17 +375,20 @@ def analizador():
 def analizar():
     receta = request.form.get("ingrediente")
 
-    datos = obtener_nutrientes(receta)
+    resultado = obtener_nutrientes(receta)
 
-    if datos is None:
+    if resultado is None:
         return render_template("resultado.html", ingrediente=receta, error=True)
 
-    for k in datos:
-        datos[k] = round(datos[k], 2)
+    nutrientes, porcion = resultado
+
+    for k in nutrientes:
+        nutrientes[k] = round(nutrientes[k], 2)
 
     return render_template("resultado.html",
                             ingrediente=receta,
-                            nutrientes=datos,
+                            nutrientes=nutrientes,
+                            porcion=porcion,
                             error=False)
 
 if __name__ == '__main__':
