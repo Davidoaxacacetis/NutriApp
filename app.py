@@ -323,21 +323,25 @@ def obtener_nutrientes(nombre):
 def analizador():
     return render_template("analizador.html")
 
-
 @app.route("/analizar", methods=["POST"])
 def analizar():
     receta = request.form.get("ingrediente")
 
-    datos = obtener_nutrientes(receta)
+    resultado = obtener_nutrientes(receta)
 
-    if datos is None:
+    if resultado is None:
         return render_template("resultado.html", ingrediente=receta, error=True)
+
+    datos, porcion = resultado
 
     for k in datos:
         datos[k] = round(datos[k], 2)
 
-    return render_template("resultado.html", ingrediente=receta, nutrientes=datos, error=False)
-
+    return render_template("resultado.html",
+                           ingrediente=receta,
+                           nutrientes=datos,
+                           porcion=porcion,
+                           error=False)
 
 if __name__ == '__main__':
     app.run(debug=True)
