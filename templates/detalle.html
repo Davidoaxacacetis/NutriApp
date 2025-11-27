@@ -35,15 +35,6 @@
         {% endfor %}
     </ul>
 
-    <h4>🍽 Porciones disponibles</h4>
-    <ul class="list-group">
-        {% for porcion in alimento.foodPortions %}
-        <li class="list-group-item">
-            {{ porcion.portionDescription }} — <em>{{ porcion.gramWeight }} g</em>
-        </li>
-        {% endfor %}
-    </ul>
-
     <div class="mt-4">
         <a href="/" class="btn btn-secondary">⬅ Volver a la búsqueda</a>
     </div>

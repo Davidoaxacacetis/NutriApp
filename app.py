@@ -265,7 +265,14 @@ def busqueda():
         else:
             alimentos = []
 
-    return render_template("busqueda.html", alimentos=alimentos, query=query, tipos=tipos)
+    return render_template(
+        "busqueda.html",
+        alimentos=alimentos,
+        query=query,
+        tipos=tipos,
+        nutrientes={}  
+        )
+
 
 @app.route("/detalle/<int:fdc_id>")
 def detalle(fdc_id):
@@ -277,7 +284,7 @@ def detalle(fdc_id):
     else:
         data = None
 
-    return render_template("detalle.html", alimento=data)
+    return render_template("detalle.html",alimento=data)
 
 def obtener_nutrientes(nombre):
     params = {
@@ -339,7 +346,6 @@ def analizar():
                             ingrediente=receta,
                             nutrientes=datos,
                             error=False)
-
 
 if __name__ == '__main__':
     app.run(debug=True)
