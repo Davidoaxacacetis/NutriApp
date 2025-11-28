@@ -1,70 +1,45 @@
 {% extends "base.html" %}
 
-{% block titulo %}Resultados de la Receta{% endblock %}
+{% block titulo %}Buscar Alimentos - USDA{% endblock %}
 
 {% block contenido %}
-<div class="container mt-4">
-    <div class="card p-4 shadow">
-        <h3 class="text-center">Resultado del análisis</h3>
+<div class="card shadow-sm p-4">
+    <h2 class="text-center mb-3">Buscar alimento</h2>
 
-        <p><strong>Ingrediente:</strong> {{ ingrediente }}</p>
-        <p><strong>Porción analizada:</strong> {{ porcion }}</p>  
+    <form method="POST" class="d-flex justify-content-center">
+        <input type="text" name="query" class="form-control w-50 me-2"
+                placeholder="Ejemplo: banana, arroz..." value="{{ query }}" required>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
 
-        {% if error %}
-            <p class="text-danger">No se encontraron datos del ingrediente.</p>
-        {% else %}
-            <h4>Nutrientes:</h4>
-            <ul>
-                {% for nombre, valor in nutrientes.items() %}
-                    <li>{{ nombre }}: {{ valor }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </div>
-</div>
+    {% if alimentos %}
+    <div class="mt-4">
+        <h4 class="mb-3">Resultados de búsqueda:</h4>
+        <div class="row">
 
-<div class="container mt-4">
-    <div class="card shadow">
-        <div class="card-body">
-            <h3 class="card-title text-center mb-3">🔍 ¿Cómo funciona el Analizador de Recetas?</h3>
-            <p class="card-text">
-                El analizador de recetas interpreta automáticamente cada ingrediente 
-                que escribas, identifica su cantidad, unidad y nombre, y lo convierte 
-                a gramos usando una tabla interna de equivalencias.
-            </p>
+            {% for item in alimentos %}
+            <div class="col-md-4"> 
+                <div class="card mb-3 shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.description }}</h5>
+                        <p class="card-text">
+                            <strong>ID:</strong> {{ item.fdcId }} <br>
+                            <strong>Tipo:</strong> {{ item.dataType }}
+                        </p>
+                        <a href="{{ url_for('detalle', fdc_id=item.fdcId) }}"
+                            class="btn btn-outline-primary btn-sm">Ver detalles</a>
+                    </div>
+                </div>
+            </div> 
+            {% endfor %}
 
-            <p class="card-text">
-                Después, se conecta a la <strong>API oficial del USDA</strong> para buscar 
-                el alimento real dentro de su base de datos nutricional. Si el primer resultado 
-                no contiene macronutrientes, analiza más resultados hasta encontrar uno que 
-                incluya proteína, carbohidratos y grasas.
-            </p>
-
-            <p class="card-text">
-                Finalmente, calcula los nutrientes basándose en la cantidad en gramos 
-                que escribiste y te muestra:
-            </p>
-
-            <ul>
-                <li>Calorías</li>
-                <li>Proteína</li>
-                <li>Grasas</li>
-                <li>Carbohidratos</li>
-            </ul>
-
-            <p class="card-text">
-                También genera <strong>totales de la receta completa</strong> para que puedas ver 
-                el aporte nutricional real de todo el platillo.
-            </p>
-
-            <p class="card-text text-muted">
-                Tip: escribe cada ingrediente en una línea así:<br>
-                <code>1 cup milk</code><br>
-                <code>1 egg </code><br>
-                <code>1 tbsp sugar</code>
-            </p>
         </div>
     </div>
-</div>
 
+    {% elif query %}
+    <div class="alert alert-warning mt-4">
+        No se encontraron alimentos para "{{ query }}".
+    </div>
+    {% endif %}
+</div>
 {% endblock %}

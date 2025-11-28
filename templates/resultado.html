@@ -9,6 +9,10 @@
 
         <p><strong>Ingrediente:</strong> {{ ingrediente }}</p>
 
+        {% if not error %}
+            <p><strong>Porción analizada:</strong> {{ porcion }} g</p>
+        {% endif %}
+
         {% if error %}
             <p class="text-danger">No se encontraron datos del ingrediente.</p>
         {% else %}
@@ -21,6 +25,7 @@
         {% endif %}
     </div>
 </div>
+
 <div class="container mt-4">
     <div class="card shadow">
         <div class="card-body">
@@ -54,12 +59,6 @@
                 También genera <strong>totales de la receta completa</strong> para que puedas ver 
                 el aporte nutricional real de todo el platillo.
             </p>
-
-            <p class="card-text text-muted">
-                Tip: escribe cada ingrediente en una línea así:<br>
-                <code>1 cup milk</code><br>
-                <code>1 egg </code><br>
-                <code>1 tbsp sugar</code>
             </p>
         </div>
     </div>

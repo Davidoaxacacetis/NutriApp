@@ -265,7 +265,14 @@ def busqueda():
         else:
             alimentos = []
 
-    return render_template("busqueda.html", alimentos=alimentos, query=query, tipos=tipos)
+    return render_template(
+        "busqueda.html",
+        alimentos=alimentos,
+        query=query,
+        tipos=tipos,
+        nutrientes={}  
+        )
+
 
 @app.route("/detalle/<int:fdc_id>")
 def detalle(fdc_id):
@@ -277,9 +284,50 @@ def detalle(fdc_id):
     else:
         data = None
 
-    return render_template("detalle.html", alimento=data)
+    return render_template("detalle.html",alimento=data)
 
 def obtener_nutrientes(nombre):
+    params = {
+        "api_key": API_KEY,
+        "query": nombre,
+        "pageSize": 1
+    }
+
+    resp = requests.get(USDA_URL, params=params)
+    data = resp.json()
+
+    if "foods" not in data or len(data["foods"]) == 0:
+        return None
+
+    food = data["foods"][0]
+
+    nutrientes = {
+        "Proteína (g)": 0,
+        "Grasa (g)": 0,
+        "Carbohidratos (g)": 0,
+        "Calorías": 0
+    }
+
+    for n in food.get("foodNutrients", []):
+        nombre_n = n.get("nutrientName", "")
+        valor = n.get("value")
+
+        if valor is None:
+            continue
+
+        if nombre_n == "Protein":
+            nutrientes["Proteína (g)"] = valor
+        elif nombre_n == "Total lipid (fat)":
+            nutrientes["Grasa (g)"] = valor
+        elif nombre_n == "Carbohydrate, by difference":
+            nutrientes["Carbohidratos (g)"] = valor
+        elif nombre_n == "Energy":
+            nutrientes["Calorías"] = valor
+
+    porcion = 100  
+
+    return nutrientes, porcion
+
     params = {
         "api_key": API_KEY,
         "query": nombre,
@@ -332,12 +380,16 @@ def analizar():
     if resultado is None:
         return render_template("resultado.html", ingrediente=receta, error=True)
 
-    datos, porcion = resultado
+    nutrientes, porcion = resultado
 
-    for k in datos:
-        datos[k] = round(datos[k], 2)
+    for k in nutrientes:
+        nutrientes[k] = round(nutrientes[k], 2)
 
-    return render_template("resultado.html",ingrediente=receta,nutrientes=datos,porcion=porcion,error=False)
+    return render_template("resultado.html",
+                            ingrediente=receta,
+                            nutrientes=nutrientes,
+                            porcion=porcion,
+                            error=False)
 
 @app.route("/banco", methods=["GET","POST"])
 def banco():
