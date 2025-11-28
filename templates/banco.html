@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block titulo %}Banco de Recetas{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4 text-white">
+
+    <h2 class="text-center mb-4">Banco de Recetas 🍽️</h2>
+
+    <form method="POST" class="d-flex justify-content-center mb-4">
+        <input 
+            name="query" 
+            class="form-control w-50 me-2 bg-dark text-white border-secondary"
+            placeholder="Ejemplo: pasta, chicken, soup..."
+            value="{{ query }}"
+        >
+        <button class="btn btn-primary">Buscar</button>
+    </form>
+
+    {% if recetas %}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+        {% for r in recetas %}
+        <div class="col">
+            <div class="card h-100 shadow bg-dark text-white border-secondary">
+
+                {% if r.strMealThumb %}
+                <img src="{{ r.strMealThumb }}" class="card-img-top" alt="{{ r.strMeal }}">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ r.strMeal }}</h5>
+                </div>
+
+                <div class="card-footer text-center bg-secondary">
+                    <a href="{{ url_for('receta_detalles', id_meal=r.idMeal) }}" class="btn btn-light w-100">
+                        Ver receta
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    {% elif query %}
+    <p class="text-center mt-4">❌ No se encontraron recetas para "<strong>{{ query }}</strong>".</p>
+    {% endif %}
+
+</div>
+{% endblock %}

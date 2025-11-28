@@ -12,6 +12,8 @@ USUARIOS_REGISTRADOS ={
     }
 }
 
+BASE = "https://www.themealdb.com/api/json/v1/1"
+
 API_KEY = "udJqwbKLuDZTGgIEmmOlAre5tV47sjQ5ichJxxQO"
 USDA_URL = "https://api.nal.usda.gov/fdc/v1/foods/search"
 
@@ -103,7 +105,6 @@ def registrame():
     flash(f"¡Registro exitoso para {nombrecompleto}!", "success")
     return redirect(url_for("sesion"))
 
-
 @app.route("/inicia-sesion")
 def sesion():
     return render_template("inicia.html")
@@ -149,7 +150,6 @@ def perfil():
     usuario = USUARIOS_REGISTRADOS.get(email)
     
     return render_template("perfil.html", usuario=usuario, email=email)
-
 
 @app.route("/tasa")
 def Itmb():
@@ -338,6 +338,26 @@ def analizar():
         datos[k] = round(datos[k], 2)
 
     return render_template("resultado.html",ingrediente=receta,nutrientes=datos,porcion=porcion,error=False)
+
+@app.route("/banco", methods=["GET","POST"])
+def banco():
+    recetas = None
+    query = ""
+    if request.method == "POST":
+        query = request.form.get("query", "").strip()
+        resp = requests.get(f"{BASE}/search.php", params={"s": query})
+        data = resp.json()
+        recetas = data.get("meals") 
+    return render_template("banco.html", recetas=recetas, query=query)
+
+@app.route("/receta/<id_meal>")
+def receta_detalles(id_meal):
+    resp = requests.get(f"{BASE}/lookup.php", params={"i": id_meal})
+    data = resp.json()
+    receta = None
+    if data.get("meals"):
+        receta = data["meals"][0]
+    return render_template("receta_detalles.html", receta=receta)
 
 if __name__ == '__main__':
     app.run(debug=True)
