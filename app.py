@@ -231,6 +231,7 @@ def pesoideal():
         rango = (peso_minimo, peso_maximo)
 
     return render_template("pesoideal.html", resultado=resultado, rango=rango)
+
 @app.route("/macros", methods=["GET", "POST"])
 def macros():
     proteinas = grasas = carbohidratos = None
@@ -328,45 +329,6 @@ def obtener_nutrientes(nombre):
 
     return nutrientes, porcion
 
-    params = {
-        "api_key": API_KEY,
-        "query": nombre,
-        "pageSize": 1
-    }
-
-    resp = requests.get(USDA_URL, params=params)
-    data = resp.json()
-
-    if "foods" not in data or len(data["foods"]) == 0:
-        return None
-
-    food = data["foods"][0]
-
-    nutrientes = {
-        "Proteína (g)": 0,
-        "Grasa (g)": 0,
-        "Carbohidratos (g)": 0,
-        "Calorías": 0
-    }
-
-    for n in food.get("foodNutrients", []):
-        nombre_n = n.get("nutrientName", "")
-        valor = n.get("value")
-
-        if valor is None:
-            continue
-
-        if nombre_n == "Protein":
-            nutrientes["Proteína (g)"] = valor
-        elif nombre_n == "Total lipid (fat)":
-            nutrientes["Grasa (g)"] = valor
-        elif nombre_n == "Carbohydrate, by difference":
-            nutrientes["Carbohidratos (g)"] = valor
-        elif nombre_n == "Energy":
-            nutrientes["Calorías"] = valor
-
-    return nutrientes
-
 @app.route("/analizador")
 def analizador():
     return render_template("analizador.html")
@@ -378,7 +340,7 @@ def analizar():
     resultado = obtener_nutrientes(receta)
 
     if resultado is None:
-        return render_template("resultado.html", ingrediente=receta, error=True)
+        return render_template("resultado.html", receta=receta, error=True)
 
     nutrientes, porcion = resultado
 
@@ -386,10 +348,12 @@ def analizar():
         nutrientes[k] = round(nutrientes[k], 2)
 
     return render_template("resultado.html",
-                            ingrediente=receta,
+                            receta=receta,
                             nutrientes=nutrientes,
                             porcion=porcion,
-                            error=False)
+                            error=False,
+                            
+                            )
 
 @app.route("/banco", methods=["GET","POST"])
 def banco():
@@ -404,7 +368,7 @@ def banco():
 
 @app.route("/receta/<id_meal>")
 def receta_detalles(id_meal):
-    resp = requests.get(f"{BASE}/lookup.php", params={"i": id_meal})
+    resp = requests.get(f"{BASE}/lookup.php", params={"i": id_meal}) 
     data = resp.json()
     receta = None
     if data.get("meals"):
